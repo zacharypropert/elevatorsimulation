@@ -1,0 +1,9 @@
+/*
+*
+* Class file for PassengerSource.  
+* PassengerSource will generate passengers with randomized attributes,
+* keeps track of these passengers in a collection. Randomly generates the attributes, 
+* if the attributes do not fit in with the elevator/building schematics the passenger
+* is not created or add to the queue.
+*
+*/
