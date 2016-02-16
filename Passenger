@@ -11,7 +11,7 @@ public class Passenger
     // instance variables - replace the example below with your own
     private int start;
     private int destination;
-    priavte int time;
+    private int time;
 
     /**
      * Creates a new passenger with a starting location and a destination, also sets the
