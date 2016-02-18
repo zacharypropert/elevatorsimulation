@@ -1,7 +1,0 @@
-/*
-*
-* Class Queue.
-* Queue keeps track of the queue of passengers and collaborates with eCar so it know where to go to pick up the 
-* next passenger.
-*
-*/
