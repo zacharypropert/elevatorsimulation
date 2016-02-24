@@ -1,3 +1,4 @@
+
 /**
  * Write a description of class ECar here.
  * 
@@ -12,19 +13,19 @@ public class ECar
     private SinkList sinkList;
     private InCarList incarList;
     private int floor;
-    
+    private int maxfloor;
     /**
      * Constructor for objects of class ECar
      * Starts the car at floor 1
      */
-    public ECar(UpList u, DownLiist d, SinkList s, InCarList i)
+    public ECar(UpList u, DownList d, SinkList s, InCarList i, int floors)
     {
-        Idle = 1;
         upList = u;
         downList = d;
         sinkList = s;
         incarList = i;
         floor = 1;
+        maxFloor = floors;
         
     }
 
