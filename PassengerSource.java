@@ -1,12 +1,3 @@
-/*
-*
-* Class file for PassengerSource.  
-* PassengerSource will generate passengers with randomized attributes,
-* keeps track of these passengers in a collection. Randomly generates the attributes, 
-* if the attributes do not fit in with the elevator/building schematics the passenger
-* is not created or add to the queue.
-*
-*/
 import java.util.*;
 
 /**
@@ -17,10 +8,13 @@ import java.util.*;
  */
 public class PassengerSource
 {
+
     private ArrayList<Passenger>upList;  
     private ArrayList<Passenger> downList;  
     Random rgen = new Random();
     private int totalFloors = 3;
+    private int rgenFloor;
+    // private Passenger newPassenger;
 
     /**
      * Constructor for objects of class PassengerSource
@@ -28,37 +22,61 @@ public class PassengerSource
     public PassengerSource()
     {
         upList=new ArrayList<>();
-        downList=new ArrayList<>(); 
-    }
+        downList=new ArrayList<>();
+        //createPassenger();
+        rgenFloor = rgen.nextInt(3);    
+    }   
 
     /**
-     *  Sorts the newly created passenger in the up or down list.
+     *Creates and places passenger
      */
-    public void sort()
+
+    public void createPassenger()
     {
-        if(Passenger.getStart() < Passenger.getDestination())
+        int maxFloor = 100;
+        int halfMax = maxFloor / 2;
+        int randomInt = halfMax + maxFloor;
+        int start = rgen.nextInt(randomInt - (halfMax / 4));
+       // rgenFloor = rgen.nextInt(randomInt);  
+        int end = rgen.nextInt(randomInt);
+        
+        if(start > maxFloor)
+            start = 0;
+            
+        if(end > maxFloor)
+            end = 0;
+            
+        while(start==end)
         {
-            upList.add(p1);
-        }else if(Passenger.getStart() > Passenger.getDestination())
+            end = rgenFloor;
+            rgenFloor = rgen.nextInt(3);  
+        }
+
+        Passenger newPassenger = new Passenger(start, end);
+
+        if(newPassenger.getStart() < newPassenger.getDestination())
         {
-            downList.add(p1);
-        }else
+            upList.add(newPassenger);
+        }else  
         {
-            createPassenger();
+            downList.add(newPassenger);
         }
     }
 
-    /**
-     * 
-     */
-
-    public Passenger createPassenger()
+    public void test()
     {
-        int start = rgen;
-        int end = rgen;
+        
+        System.out.println("Up List");
+        for(Passenger u: upList)
+            System.out.println(u.toString());
 
-        Passenger newPassenger = new Passenger(start, end);
-        sort();
+        System.out.println();
+        System.out.println();
+        System.out.println("Down List");
+
+        for(Passenger d: downList)
+            System.out.println(d.toString());
+
     }
 
 }
