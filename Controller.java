@@ -17,6 +17,7 @@ public class Controller
     private int maxFloor;
     private PassengerSource source;
     private ECar car;
+    private int tick;
     
     /**
      * Constructor for objects of class Controller.
@@ -35,6 +36,10 @@ public class Controller
         run(10);
     }
     
+    public int getTick()
+    {
+        return tick;
+    }
     /**
      * Contains the simulation loop to invoke the act method on the objects.
      */
