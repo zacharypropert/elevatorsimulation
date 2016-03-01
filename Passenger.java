@@ -52,6 +52,14 @@ public class Passenger
     }
     
     /**
+     * Returns the start tick of the passenger from when the passenger is created.
+     */
+    public void setStartTick(int sTick)
+    {
+        startTick = sTick;
+    }
+    
+    /**
      * Returns the entry tick of the passenger from when the passenger enters the eCar.
      */
     public int getEntryTick()
@@ -60,11 +68,27 @@ public class Passenger
     }
     
     /**
+     * Returns the entry tick of the passenger from when the passenger enters the eCar.
+     */
+    public void setEntryTick(int eTick)
+    {
+        entryTick = eTick;
+    }
+    
+    /**
      * Returns the exit tick of the passenger from when the passenger exits the eCar.
      */
     public int getExitTick()
     {
         return exitTick;
+    }
+    
+     /**
+     * Returns the exit tick of the passenger from when the passenger exits the eCar.
+     */
+    public void setExitTick(int xTick)
+    {
+        exitTick = xTick;
     }
   
   
