@@ -10,7 +10,11 @@ public class Passenger
 {
     private int start; //Starting floor
     private int destination; //ending floor
-    private int time; //keep track of time, in ticks?
+    private int startTick; //keep track of time, in ticks?
+    private int entryTick;
+    private int exitTick;
+    private Controller controller;
+    
 
     /**
      * Creates a new passenger with a starting location and a destination, also sets the
@@ -20,7 +24,7 @@ public class Passenger
     {
         this.start = start;
         this.destination = destination;
-        time = 0; //may be changed depending on the way the tick is calculated
+        startTick = controller.getTick(); //may be changed depending on the way the tick is calculated
     }
     
     /**
@@ -40,11 +44,27 @@ public class Passenger
     }
     
     /**
-     * Returns the time tick of the passenger.
+     * Returns the start tick of the passenger from when the passenger is created.
      */
-    public int getTime()
+    public int getStartTick()
     {
-        return time;
+        return startTick;
+    }
+    
+    /**
+     * Returns the entry tick of the passenger from when the passenger enters the eCar.
+     */
+    public int getEntryTick()
+    {
+        return entryTick;
+    }
+    
+    /**
+     * Returns the exit tick of the passenger from when the passenger exits the eCar.
+     */
+    public int getExitTick()
+    {
+        return exitTick;
     }
   
   
