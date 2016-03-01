@@ -14,7 +14,7 @@ public class Controller
     private DownList downList;
     private SinkList sinkList;
     private InCarList incarList;
-    private int maxFloor; //EDIT EDIT
+    private int maxFloor; 
     private PassengerSource source;
     private ECar car;
     private int tick;
