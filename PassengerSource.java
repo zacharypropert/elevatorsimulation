@@ -57,20 +57,32 @@ public class PassengerSource
         }
     }
 
+ 
     public void test()
     {
+
         System.out.println("Up List");
-        upList.display();
+
+        upList.Display();
+
         System.out.println();
         System.out.println();
         System.out.println("Down List");
-        downList.display();
-    }
+        downList.Display();
 
+    }
+    
     public void act(int tick)
     {
-        createPassenger();
-        createPassenger();
+        int count = 0;
+        while(count <= tick)
+        {        
+            createPassenger();
+            count++;
+        }
+
         test();
-}
+
+    }
+
 }
