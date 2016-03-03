@@ -1,22 +1,31 @@
-
+import java.util.ArrayList;
 /**
  * Write a description of class SinkList here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @David Hoadley 
+ * @3/3/2016
  */
 public class SinkList extends PList
 {
-    // instance variables - replace the example below with your own
-    private int x;
 
     /**
      * Constructor for objects of class SinkList
      */
-    public SinkList()
+    public SinkList(Clock c)
     {
-        // initialise instance variables
-        x = 0;
+        super(c);
     }
+
+    //override
+    public void addList(ArrayList<Passenger> other)
+    {
+        //
+        for(Passenger p : other) {
+            p.setExitTick(c.getTick());
+            pList.add(p);
+            
+        }
+    }
+
 
 }
