@@ -13,18 +13,20 @@ public class Passenger
     private int startTick; //keep track of time, in ticks?
     private int entryTick;
     private int exitTick;
-    private Controller controller;
-    
+    private Clock clock;
+       
 
     /**
      * Creates a new passenger with a starting location and a destination, also sets the
      * time to 0.
      */
-    public Passenger(int start, int destination)
+    public Passenger(int start, int destination, int tick)
     {
         this.start = start;
         this.destination = destination;
-        startTick = controller.getTick(); //may be changed depending on the way the tick is calculated
+        startTick = tick;// clock.getTick(); //may be changed depending on the way the tick is calculated
+        entryTick = 0;
+        exitTick = 0;
     }
     
     /**

@@ -2,7 +2,7 @@ import java.util.*;
 
 /**
  * Generates Passengers with randomized attributes, and inserts into UpList, DownList collections. Randomly generates the starting location and the destination..
- * 
+ *
  * @Zach & Connor
  * @2/16/2016
  */
@@ -14,17 +14,19 @@ public class PassengerSource
     Random rgen = new Random();
     private int maxFloor;
     private int rgenFloor;
+    private Clock clock;  //JEREMY ADDED!
     
     // private Passenger newPassenger;
 
     /**
      * Constructor for objects of class PassengerSource
      */
-    public PassengerSource(UpList upList, DownList downList, int maxFloor)
+    public PassengerSource(UpList upList, DownList downList, int maxFloor, Clock clock)  //JEREMY!
     {
         //upList=new ArrayList<>();
         //downList=new ArrayList<>();
         //createPassenger();
+        this.clock= clock;  //JEREMY
         rgenFloor = rgen.nextInt(3);    
     }   
 
@@ -53,7 +55,7 @@ public class PassengerSource
             rgenFloor = rgen.nextInt(3);  
         }
 
-        Passenger newPassenger = new Passenger(start, end);
+        Passenger newPassenger = new Passenger(start, end, clock.getTick());//JEREMY
 
         if(newPassenger.getStart() < newPassenger.getDestination())
         {
@@ -79,9 +81,12 @@ public class PassengerSource
             downList.display();
 
     }
-    public void act()
+    
+    public void act(int tick)
     {
         createPassenger();
+        createPassenger();
+        test();
         
     }
 
