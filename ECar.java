@@ -33,15 +33,18 @@ public class ECar
         
     }
     
-    //need a way to test for next floor ↓↓↓↓↓↓
     
     public void act()
     {
         for(int x = floor - direction; x <= maxFloor && x > 0; x=x+direction){
-            //this should work for both up and down ↑↑↑↑
-            // or maybe it needs two for loops based on direction?
+            for(int x = floor - direction; x <= maxFloor+1 && x > -1; x=x+direction){
+            if(u.checkRequest(floor) != 0){
+                while(floor<u.checkRequest(floor))
+                    floor=floor+direction;
+                i.removeAtFloor();
+            }
         }
-        
+        //this is what I have so far some feedback would be helpful
     }
     
     
