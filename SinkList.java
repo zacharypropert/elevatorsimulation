@@ -21,7 +21,7 @@ public class SinkList extends PList
     {
         //
         for(Passenger p : other) {
-            p.setExitTick(c.getTick());
+            p.setExitTick(clock.getTick());
             pList.add(p);
             
         }
