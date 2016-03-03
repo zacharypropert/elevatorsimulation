@@ -8,14 +8,14 @@ import java.util.Iterator;
  */
 public class PList
 {
-    private ArrayList<Passenger>pList;
-    private Passenger entryTick;
-    private Clock tick;
+    protected ArrayList<Passenger>pList;
+    //private Passenger entryTick;
+    protected Clock tick;
     
     /**
      * Constructor for objects of class PList
      */
-    public PList()
+    public PList(Clock c)
     {
         pList = new ArrayList<>();
        
@@ -38,7 +38,7 @@ public class PList
         //
         for(Passenger p : other) {
             pList.add(p);
-            Passenger.setEntryTick(Clock.getTick()); //I did not have clock to check
+            Passenger.setEntryTick(Clock.getTick()); //working...
         }
     }
     
@@ -65,10 +65,10 @@ public class PList
     /**
      * tests display
      */
-    public void Display()
+    public void display()
     {
         //
-        for(Passenger p : other) {
+        for(Passenger p : pList) {
             System.out.println(p);
         }
     }
