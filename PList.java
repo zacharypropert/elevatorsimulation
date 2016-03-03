@@ -68,7 +68,9 @@ public class PList
     public void Display()
     {
         //
-        Passenger.toString();
+        for(Passenger p : other) {
+            System.out.println(p);
+        }
     }
 
 }
