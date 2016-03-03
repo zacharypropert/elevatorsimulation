@@ -26,7 +26,7 @@ public class Clock
         // Returns the current tick
         return tick;
     }
-    //fsdafkasdl fsdafsd sd
+    
     /**
      * This method will add one to tick.
      **/
