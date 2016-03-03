@@ -33,13 +33,13 @@ public class ECar
         
     }
     
+    //need a way to test for next floor ↓↓↓↓↓↓
+    
     public void act()
     {
         for(int x = floor - direction; x <= maxFloor && x > 0; x=x+direction){
-            
+            //this should work for both up and down ↑↑↑↑
         }
-             
-        
         
     }
     
