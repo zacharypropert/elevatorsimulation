@@ -19,10 +19,16 @@ public class UpList extends PList
     /**
      * passengers going UP
      */
-    public void createUpList()
+    public int checkRequest(int floor)
     {
         //
-        
+        int closest = pList.get(0).getStart();
+        for (int x =0;x<pList.size();x++) {
+            if (pList.get(x).getStart() >= floor && pList.get(x).getStart() <= closest) {
+                closest = pList.get(x).getStart();
+            }
+        }
+        return closest;
     }
 
 
