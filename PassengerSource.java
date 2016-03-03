@@ -23,7 +23,7 @@ public class PassengerSource
         //downList=new ArrayList<>();
         //createPassenger();
         this.clock= clock; //JEREMY
-        rgenFloor = rgen.nextInt(3);
+        this.maxFloor = maxFloor; //Zach
         this.upList = upList;
         this.downList = downList;
     }
@@ -44,8 +44,7 @@ public class PassengerSource
             end = 1;
         while(start==end)
         {
-            end = rgenFloor;
-            rgenFloor = rgen.nextInt(3);
+           end = rgen.nextInt(randomInt + 1); // Zach
         }
         Passenger newPassenger = new Passenger(start, end, clock.getTick());//JEREMY
         if(newPassenger.getStart() < newPassenger.getDestination())
@@ -63,7 +62,7 @@ public class PassengerSource
 
         System.out.println("Up List");
 
-        upList.Display();
+        upList.Display(); 
 
         System.out.println();
         System.out.println();
@@ -74,14 +73,14 @@ public class PassengerSource
     
     public void act(int tick)
     {
-        int count = 0;
-        while(count <= tick)
+        int count = 0; //zach
+        while(count <= tick) //zach
         {        
-            createPassenger();
-            count++;
+            createPassenger(); //zach
+            count++; //zach
         }
 
-        test();
+        test(); 
 
     }
 
