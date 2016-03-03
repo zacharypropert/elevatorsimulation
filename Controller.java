@@ -1,4 +1,5 @@
 
+
 /**
  * Creates the initial objects.
  * Accesses the "Master List(s)" of all the Passengers.
@@ -14,10 +15,11 @@ public class Controller
     private DownList downList;
     private SinkList sinkList;
     private InCarList incarList;
-    private int maxFloor; 
+    private int maxFloor;
     private PassengerSource source;
     private ECar car;
     private int tick;
+    private Clock myClock;
     
     /**
      * Constructor for objects of class Controller.
@@ -25,21 +27,19 @@ public class Controller
     public Controller(int maxFloor)
     {
         this.maxFloor = maxFloor;
+        myClock = new Clock();
         upList = new UpList();
         downList = new DownList();
         sinkList = new SinkList();
         incarList = new InCarList();  
     
-        source = new PassengerSource(upList, downList, maxFloor);
+        source = new PassengerSource(upList, downList, maxFloor, myClock);
         car = new ECar(upList, downList, sinkList, incarList, maxFloor);
+        
         
         run(10);
     }
     
-    public int getTick()
-    {
-        return tick;
-    }
     /**
      * Contains the simulation loop to invoke the act method on the objects.
      */
@@ -54,6 +54,9 @@ public class Controller
             car.act(tick);
             
             tick++;
+            
+            myClock.incrementTick();
+            
         }
         
     }
