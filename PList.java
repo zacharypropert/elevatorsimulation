@@ -9,7 +9,8 @@ import java.util.Iterator;
 public class PList
 {
     private ArrayList<Passenger>pList;
-    
+    private Passenger entryTick;
+    private Clock tick;
     
     /**
      * Constructor for objects of class PList
@@ -37,6 +38,7 @@ public class PList
         //
         for(Passenger p : other) {
             pList.add(p);
+            Passenger.setEntryTick(Clock.getTick()); //I did not have clock to check
         }
     }
     
@@ -53,10 +55,20 @@ public class PList
             Passenger p = it.next();
             if (p.getDestination() == floor) {
                 myList.add(p);
-                it.remove(p);
+                it.remove();  //sbw fix - took out parameter p
             }
         }
             
         return myList;
     }
+    
+    /**
+     * tests display
+     */
+    public void Display()
+    {
+        //
+        Passenger.toString();
+    }
+
 }
