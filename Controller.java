@@ -28,10 +28,10 @@ public class Controller
     {
         this.maxFloor = maxFloor;
         myClock = new Clock();
-        upList = new UpList();
-        downList = new DownList();
-        sinkList = new SinkList();
-        incarList = new InCarList();  
+        upList = new UpList(myClock);    //sbw added parameters
+        downList = new DownList(myClock);
+        sinkList = new SinkList(myClock);
+        incarList = new InCarList(myClock);  //...sbw
     
         source = new PassengerSource(upList, downList, maxFloor, myClock);
         car = new ECar(upList, downList, sinkList, incarList, maxFloor);

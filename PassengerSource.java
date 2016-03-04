@@ -62,12 +62,12 @@ public class PassengerSource
 
         System.out.println("Up List");
 
-        upList.Display(); 
+        upList.display();   //sbw display()
 
         System.out.println();
         System.out.println();
         System.out.println("Down List");
-        downList.Display();
+        downList.display();  //sbw
 
     }
     

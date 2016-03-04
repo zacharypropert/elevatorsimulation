@@ -5,15 +5,15 @@
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class DownList extends PList
+public class DownList extends PList  //sbw
 {
 
     /**
      * Constructor for objects of class DownList
      */
-    public DownList()
+    public DownList(Clock c)  //sbw
     {
-        //
+        super(c);  //sbw
     }
     
     

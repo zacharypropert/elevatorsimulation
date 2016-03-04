@@ -34,9 +34,9 @@ public class ECar
     }
     
     
-    public void act()
+    public void act(int tick)  //sbw - parameter
     {
-        for(int x = floor - direction; x <= maxFloor && x > 0; x=x+direction){
+      /*  for(int x = floor - direction; x <= maxFloor && x > 0; x=x+direction){
             for(int x = floor - direction; x <= maxFloor+1 && x > -1; x=x+direction){
             if(u.checkRequest(floor) != 0){
                 while(floor<u.checkRequest(floor))
@@ -44,7 +44,7 @@ public class ECar
                 i.removeAtFloor();
             }
         }
-        //this is what I have so far some feedback would be helpful
+      */  //this is what I have so far some feedback would be helpful
     }
     
     

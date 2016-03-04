@@ -11,9 +11,9 @@ public class UpList extends PList
     /**
      * Constructor for objects of class UpList
      */
-    public UpList()
+    public UpList(Clock c)//sbw
     {
-        //
+        super(c);  //sbw
     }
     
     /**
