@@ -1,22 +1,30 @@
-
+import java.util.ArrayList;
 /**
  * Write a description of class InCarList here.
  * 
- * @author (your name) 
+ * @author (Evan) 
  * @version (a version number or a date)
  */
 public class InCarList extends PList
 {
-    // instance variables - replace the example below with your own
-    private int x;
 
     /**
      * Constructor for objects of class InCarList
      */
-    public InCarList()
+    public InCarList(Clock c)
     {
-        // initialise instance variables
-        x = 0;
+        //
+        super(c);
+    }
+
+    public void addList(ArrayList<Passenger> other)
+    {
+        //
+        for(Passenger p : other) {
+            p.setEntryTick(clock.getTick());
+            pList.add(p);
+            
+        }
     }
 
 }
