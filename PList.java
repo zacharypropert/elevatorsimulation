@@ -10,13 +10,14 @@ public class PList
 {
     protected ArrayList<Passenger>pList;
     //private Passenger entryTick;
-    protected Clock tick;
+    protected Clock clock;
     
     /**
      * Constructor for objects of class PList
      */
     public PList(Clock c)
     {
+        clock = c;
         pList = new ArrayList<>();
        
     }
@@ -38,7 +39,7 @@ public class PList
         //
         for(Passenger p : other) {
             pList.add(p);
-            Passenger.setEntryTick(Clock.getTick()); //working...
+            //Passenger.setEntryTick(Clock.getTick()); //working...
         }
     }
     
