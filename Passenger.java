@@ -1,7 +1,10 @@
 
 /**
- *Models a single passenger, creates a passenger and defines their starting location and 
- *their destination. 50% of new passengers will start on the first floor..
+ * Models a single passenger, creates a passenger and defines their starting location and 
+ * their destination. 
+ *
+ * Also declares the tick at creation, tick when passenger enters elevator car, and tick when the
+ * passenger exits the elevator car.
  * 
  * @Zach CS216
  * @2/16/2015
@@ -10,25 +13,24 @@ public class Passenger
 {
     private int start; //Starting floor
     private int destination; //ending floor
-    private int startTick; //keep track of time, in ticks?
-    private int entryTick;
-    private int exitTick;
+    private int startTick; //tick at passenger creation
+    private int entryTick; //tick when passenger enters elevator car
+    private int exitTick;  //tick when passenger exits elevator car
     private Clock clock;
-       
 
     /**
      * Creates a new passenger with a starting location and a destination, also sets the
-     * time to 0.
+     * creation tick (startTick), sets the entryTick and exitTick to 0.
      */
     public Passenger(int start, int destination, int tick)
     {
         this.start = start;
         this.destination = destination;
-        startTick = tick;// clock.getTick(); //may be changed depending on the way the tick is calculated
+        startTick = tick;
         entryTick = 0;
         exitTick = 0;
     }
-    
+
     /**
      * Returns the starting location of a passenger.
      */
@@ -36,7 +38,7 @@ public class Passenger
     {
         return start;
     }
-    
+
     /**
      * Returns the destination of the passenger.
      */
@@ -44,7 +46,7 @@ public class Passenger
     {
         return destination;
     }
-    
+
     /**
      * Returns the start tick of the passenger from when the passenger is created.
      */
@@ -52,7 +54,7 @@ public class Passenger
     {
         return startTick;
     }
-    
+
     /**
      * Returns the start tick of the passenger from when the passenger is created.
      */
@@ -60,7 +62,7 @@ public class Passenger
     {
         startTick = sTick;
     }
-    
+
     /**
      * Returns the entry tick of the passenger from when the passenger enters the eCar.
      */
@@ -68,7 +70,7 @@ public class Passenger
     {
         return entryTick;
     }
-    
+
     /**
      * Returns the entry tick of the passenger from when the passenger enters the eCar.
      */
@@ -76,7 +78,7 @@ public class Passenger
     {
         entryTick = eTick;
     }
-    
+
     /**
      * Returns the exit tick of the passenger from when the passenger exits the eCar.
      */
@@ -84,20 +86,23 @@ public class Passenger
     {
         return exitTick;
     }
-    
-     /**
+
+    /**
      * Returns the exit tick of the passenger from when the passenger exits the eCar.
      */
     public void setExitTick(int xTick)
     {
         exitTick = xTick;
     }
-  
-  
-     public String toString()
+
+    /**
+     * toString() method for class Passenger to output the passenger's starting location and where 
+     * the passenger's destination is at.
+     */
+    public String toString()
     {
-         return "A passenger is at floor "+ start + " and wishes to travel to floor "
-       + destination;
+        return "A passenger is at floor "+ start + " and wishes to travel to floor "
+        + destination;
     }
-  
+
 }
