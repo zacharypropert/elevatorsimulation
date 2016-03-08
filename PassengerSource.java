@@ -31,22 +31,38 @@ public class PassengerSource
     /**
      *Creates and places passenger
      */
-    public void createPassenger()
+  public void createPassenger()
     {
         int halfMax = maxFloor / 2;
         int randomInt = halfMax + maxFloor;
-        int start = rgen.nextInt(randomInt - (halfMax / 4) + 1);
-        // rgenFloor = rgen.nextInt(randomInt);
+        int start = rgen.nextInt(randomInt - (halfMax / 2) + 1);
         int end = rgen.nextInt(randomInt + 1);
         if(start > maxFloor)
             start = 1;
         if(end > maxFloor)
             end = 1;
+
+        if(start == 0) //zach
+            start = 1;
+        if(end == 0) //zach
+            end = 1;
+
         while(start==end)
         {
-           end = rgen.nextInt(randomInt + 1); // Zach
+            end = rgen.nextInt(randomInt + 1); // Zach
+
+            if(start > maxFloor) //zach
+                start = 1;
+            if(end > maxFloor) //zach
+                end = 1;
+
+            if(start == 0) //zach
+                start = 1;
+            if(end == 0) //zach
+                end = 1;
         }
         Passenger newPassenger = new Passenger(start, end, clock.getTick());//JEREMY
+
         if(newPassenger.getStart() < newPassenger.getDestination())
         {
             upList.addPassenger(newPassenger);
@@ -56,18 +72,23 @@ public class PassengerSource
         }
     }
 
- 
     public void test()
     {
-
-        System.out.println("Up List");
+        System.out.println("--------------------------------------------------------------");
+        System.out.println("                          Up List");
+        System.out.println("--------------------------------------------------------------");
 
         upList.display();   //sbw display()
 
         System.out.println();
-        System.out.println();
-        System.out.println("Down List");
+        System.out.println("--------------------------------------------------------------");
+        System.out.println("                         Down List");
+        System.out.println("--------------------------------------------------------------");
         downList.display();  //sbw
+
+        System.out.println();
+        System.out.println("******************************************************************");
+        System.out.println();
 
     }
     
