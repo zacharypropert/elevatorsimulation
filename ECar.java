@@ -15,7 +15,7 @@ public class ECar
     private InCarList i;
     private int maxFloor;
     private int floor;
-    
+
     /**
      * Constructor for objects of class ECar
      * Starts the car at floor 1
@@ -30,23 +30,53 @@ public class ECar
         this.i = i;
         maxFloor = m;
         floor = 1;
-        
+
     }
-    
-    
+
     public void act(int tick)  //sbw - parameter
     {
-      /*  for(int x = floor - direction; x <= maxFloor && x > 0; x=x+direction){
-            for(int x = floor - direction; x <= maxFloor+1 && x > -1; x=x+direction){
-            if(u.checkRequest(floor) != 0){
-                while(floor<u.checkRequest(floor))
-                    floor=floor+direction;
-                i.removeAtFloor();
+        if(direction == 1){
+            System.out.println("UpList Here:");
+            u.display();    //displays the upList at the beginning of the while loop
+            while(floor < maxFloor){
+                if(u.checkRequest(floor) != 0){
+                    
+                    i.addList(u.removeAtFloor(floor));
+                    s.addList(i.removeAtFloor(floor));
+                    System.out.println("");
+                    
+                }
+                floor++;
             }
+            System.out.println("InCarList Here:");
+            i.display();    //displays the inCarList at the end of the while loop
+            System.out.println("");
+            System.out.println("SinkList Here:");
+            s.display();    //displays the sinkList at the end of the while loop
+            direction = -1;
         }
-      */  //this is what I have so far some feedback would be helpful
+
+        if(direction == -1){
+            System.out.println("DownList Here:");
+            d.display();    //displays the downList at the beginning of the while loop
+            while(floor > 0){
+                if(d.checkRequest(floor) != 0){
+                    
+                    i.addList(d.removeAtFloor(floor));
+                    s.addList(i.removeAtFloor(floor));
+                    System.out.println("");
+                    
+                }
+                floor = floor-1;
+            }
+            System.out.println("InCarList Here:");      
+            i.display();            //displays the inCarList at the end of the while loop
+            System.out.println("");
+            System.out.println("SinkList Here:");
+            s.display();        //displays the sinkList at the end of the while loop
+            direction = 1;
+        }
+
     }
-    
-    
 
 }
