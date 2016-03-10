@@ -23,9 +23,14 @@ public class SinkList extends PList
         for(Passenger p : other) {
             p.setExitTick(clock.getTick());
             pList.add(p);
-            
+
         }
     }
 
+    public ArrayList<Passenger> getClone()
+    {
+        return pList; //attempted to clone but wouldn't work
+    }
 
+   
 }
