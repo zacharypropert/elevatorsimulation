@@ -18,12 +18,12 @@ public class DownList extends PList  //sbw
     
     
    /**
-     * passengers going UP
+     * passengers going DOWN
      */
     public int checkRequest(int floor)
     {
         //
-        int closest = pList.get(0).getStart();
+        int closest = 0;
         for (int x =0;x<pList.size();x++) {
             if (pList.get(x).getStart() <= floor && pList.get(x).getStart() >= closest) {
                 closest = pList.get(x).getStart();
