@@ -13,7 +13,7 @@ public class PassengerSource
     private int maxFloor;
     private int rgenFloor;
     private Clock clock; //JEREMY ADDED!
-    // private Passenger newPassenger;
+   
     /**
      * Constructor for objects of class PassengerSource
      */
@@ -96,6 +96,5 @@ public class PassengerSource
     public void act()
     {
         createPassenger(); //zach
-       // test(); 
     }
 }
