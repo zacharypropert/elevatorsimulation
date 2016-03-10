@@ -22,7 +22,7 @@ public class UpList extends PList
     public int checkRequest(int floor)
     {
         //
-        int closest = pList.get(0).getStart();
+        int closest = 1000;
         for (int x =0;x<pList.size();x++) {
             if (pList.get(x).getStart() >= floor && pList.get(x).getStart() <= closest) {
                 closest = pList.get(x).getStart();
