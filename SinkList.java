@@ -27,7 +27,7 @@ public class SinkList extends PList
         }
     }
 
-    public ArrayList<Passenger> getClone()
+    public ArrayList<Passenger> getCloneList()
     {
         return pList; //attempted to clone but wouldn't work
     }
