@@ -34,8 +34,7 @@ public class Controller
         incarList = new InCarList(myClock);  //...sbw
     
         source = new PassengerSource(upList, downList, maxFloor, myClock);
-        car = new ECar(upList, downList, sinkList, incarList, maxFloor);
-        
+        car = new ECar(upList, downList, sinkList, incarList, maxFloor, myClock);
         
         run(10);
     }
@@ -49,9 +48,9 @@ public class Controller
         
         while (tick < maxCount)
         {
-            source.act(tick);
+            source.act();
             
-            car.act(tick);
+            car.act();
             
             tick++;
             
