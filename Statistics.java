@@ -1,47 +1,41 @@
 import java.util.*;
 /**
-
  */
 public class Statistics
 {
-    private UpList upList;
-    private DownList downList;
-    private SinkList sinkList;    
-    private int ArrayList;    
+    private SinkList sinkList;
+    ArrayList<Integer> waitList = new ArrayList<Integer>();
     /**
      * Constructor for objects of class Statistics
      */
     public Statistics(UpList upList, DownList downList, SinkList sinkList)
     {
-        upList=new UpList();
-        downList=new DownList();
-        sinkList=new SinkList<>();
+        this.sinkList= sinkList;
         waitList=new ArrayList<>();
 
     }
 
     /**
-
      */
     public void avgWait()
     {
+        int wait = 0;
+        int temp = 0;
+        int totalWaitTime = 0;
+        int avgWait = 0;
         int countPassenger=0;
-        for(passenger p : sinkList)
-        {            
-            wait = p.getExit-p.getStart;
-            WaitList.add(wait);    
+        for(Passenger p : sinkList.getCloneList())
+        {
+            wait = p.getExitTick() - p.getEntryTick();
+            waitList.add(wait);
             countPassenger++;
         }
-        for(int i : WaitList)
+        for(int i : waitList)
         {
-            temp=wait;
-            tamp+wait=totalWaitTime;
+            temp = wait;
+            totalWaitTime = temp + wait;
             avgWait = totalWaitTime/countPassenger;
-            //Need way to get total passengers in simulation
-            //Longest Wait Time, Average Wait Time            
         }
-        
-        
-        System.out.println("THe average wait time for all passengers was " +avgWait);
+        System.out.println("The average wait time for all passengers was " +avgWait);
     }
 }
