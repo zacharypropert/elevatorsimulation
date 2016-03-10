@@ -31,11 +31,12 @@ public class PassengerSource
     /**
      *Creates and places passenger
      */
-  public void createPassenger()
+    public void createPassenger()
     {
+
         int halfMax = maxFloor / 2;
         int randomInt = halfMax + maxFloor;
-        int start = rgen.nextInt(randomInt - (halfMax / 2) + 1);
+        int start = rgen.nextInt(randomInt - (halfMax / 4) + 1);
         int end = rgen.nextInt(randomInt + 1);
         if(start > maxFloor)
             start = 1;
@@ -61,6 +62,7 @@ public class PassengerSource
             if(end == 0) //zach
                 end = 1;
         }
+
         Passenger newPassenger = new Passenger(start, end, clock.getTick());//JEREMY
 
         if(newPassenger.getStart() < newPassenger.getDestination())
@@ -77,7 +79,6 @@ public class PassengerSource
         System.out.println("--------------------------------------------------------------");
         System.out.println("                          Up List");
         System.out.println("--------------------------------------------------------------");
-
         upList.display();   //sbw display()
 
         System.out.println();
@@ -85,24 +86,16 @@ public class PassengerSource
         System.out.println("                         Down List");
         System.out.println("--------------------------------------------------------------");
         downList.display();  //sbw
-
+               
         System.out.println();
         System.out.println("******************************************************************");
         System.out.println();
 
     }
-    
-    public void act(int tick)
+
+    public void act()
     {
-        int count = 0; //zach
-        while(count <= tick) //zach
-        {        
-            createPassenger(); //zach
-            count++; //zach
-        }
-
-        test(); 
-
+        createPassenger(); //zach
+       // test(); 
     }
-
 }
