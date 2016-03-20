@@ -24,9 +24,13 @@ public class Controller
     /**
      * Constructor for objects of class Controller.
      */
-    public Controller(int maxFloor)
+    public Controller(int maxFloor) throws invalidFloorException
     {
+        if(maxFloor < 2)
+        throw new invalidFloorException();
+        else
         this.maxFloor = maxFloor;
+        
         myClock = new Clock();
         upList = new UpList(myClock);    //sbw added parameters
         downList = new DownList(myClock);
