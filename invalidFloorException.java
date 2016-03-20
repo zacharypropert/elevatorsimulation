@@ -1,9 +1,9 @@
 
 /**
- * Write a description of class invalidFloorException here.
+ * An exception class thrown in Controller.java and PassengerSource.java
  * 
  * @Zach
- * @version (a version number or a date)
+ * 
  */
 public class invalidFloorException extends Exception
 {
