@@ -31,7 +31,7 @@ public class PassengerSource
     /**
      *Creates and places passenger
      */
-    public void createPassenger()
+    public void createPassenger() throws invalidFloorException
     {
 
         int halfMax = maxFloor / 2;
@@ -44,9 +44,9 @@ public class PassengerSource
             end = 1;
 
         if(start == 0) //zach
-            start = 1;
+            throw new invalidFloorException(start); //zach
         if(end == 0) //zach
-            end = 1;
+            throw new invalidFloorException(end); //zach
 
         while(start==end)
         {
@@ -58,9 +58,9 @@ public class PassengerSource
                 end = 1;
 
             if(start == 0) //zach
-                start = 1;
+            throw new invalidFloorException(start); //zach
             if(end == 0) //zach
-                end = 1;
+            throw new invalidFloorException(end); //zach
         }
 
         Passenger newPassenger = new Passenger(start, end, clock.getTick());//JEREMY
@@ -95,6 +95,12 @@ public class PassengerSource
 
     public void act()
     {
-        createPassenger(); //zach
+       try{
+            createPassenger(); //zach
+        }
+        catch(invalidFloorException e) //zach
+        { 
+            act(); //zach
+        }
     }
 }
