@@ -33,7 +33,7 @@ public class ECar
 
     }
 
-    public void act(int tick)  //sbw - parameter
+    public void act()
     {
         if(direction == 1){
             System.out.println("UpList Here:");
