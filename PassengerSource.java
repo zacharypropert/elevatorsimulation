@@ -43,26 +43,9 @@ public class PassengerSource
         if(end > maxFloor)
             end = 1;
 
-        if(start == 0) //zach
+        if(start == 0 || end == 0 || start==end ) //zach
             throw new invalidFloorException(start); //zach
-        if(end == 0) //zach
-            throw new invalidFloorException(end); //zach
-
-        while(start==end)
-        {
-            end = rgen.nextInt(randomInt + 1); // Zach
-
-            if(start > maxFloor) //zach
-                start = 1;
-            if(end > maxFloor) //zach
-                end = 1;
-
-            if(start == 0) //zach
-            throw new invalidFloorException(start); //zach
-            if(end == 0) //zach
-            throw new invalidFloorException(end); //zach
-        }
-
+       
         Passenger newPassenger = new Passenger(start, end, clock.getTick());//JEREMY
 
         if(newPassenger.getStart() < newPassenger.getDestination())
