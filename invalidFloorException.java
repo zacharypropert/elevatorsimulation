@@ -14,6 +14,6 @@ public class invalidFloorException extends Exception
     
     public invalidFloorException(int floor)
     {
-        super(floor + " is an invalid amount of floors, there cannot be less than 2 floors!");
+        super(floor + " is an invalid floor!");
     }
 }
