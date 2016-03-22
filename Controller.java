@@ -38,7 +38,7 @@ public class Controller
         incarList = new InCarList(myClock);  //...sbw
     
         source = new PassengerSource(upList, downList, maxFloor, myClock);
-        car = new ECar(upList, downList, sinkList, incarList, maxFloor, myClock);
+        car = new ECar(upList, downList, sinkList, incarList, maxFloor);
         
         run(10);
     }
