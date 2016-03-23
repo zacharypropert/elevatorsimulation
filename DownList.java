@@ -15,20 +15,23 @@ public class DownList extends PList  //sbw
     {
         super(c);  //sbw
     }
-    
-    
-   /**
-     * passengers going DOWN
+
+    /**
+     * passengers going UP
      */
-    public int checkRequest(int floor)
+    public int checkRequest(int maxFloor)
     {
-        //
+        int floor = maxFloor;
         int closest = 0;
-        for (int x =0;x<pList.size();x++) {
-            if (pList.get(x).getStart() <= floor && pList.get(x).getStart() >= closest) {
-                closest = pList.get(x).getStart();
+        while(floor > 0){
+            for (int x =0;x<pList.size();x++) {
+                if (pList.get(x).getStart() <= floor && pList.get(x).getStart() >= closest) {
+                    closest = pList.get(x).getStart();
+                }
             }
+            floor = floor -1;
         }
         return closest;
     }
+
 }
