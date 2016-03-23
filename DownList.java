@@ -29,7 +29,7 @@ public class DownList extends PList  //sbw
                     closest = pList.get(x).getStart();
                 }
             }
-            floor = floor -1;
+            floor--;
         }
         return closest;
     }
