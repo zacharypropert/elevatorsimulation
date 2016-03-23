@@ -26,5 +26,11 @@ public class InCarList extends PList
             
         }
     }
+    
+    public boolean isEmpty(){
+        if(pList.isEmpty() == true)
+            return true;
+        return false;
+    }
 
 }
