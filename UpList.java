@@ -15,21 +15,23 @@ public class UpList extends PList
     {
         super(c);  //sbw
     }
-    
+
     /**
      * passengers going UP
      */
-    public int checkRequest(int floor)
+    public int checkRequest(int maxFloor)
     {
-        //
+        int floor = 0;
         int closest = 1000;
-        for (int x =0;x<pList.size();x++) {
-            if (pList.get(x).getStart() >= floor && pList.get(x).getStart() <= closest) {
-                closest = pList.get(x).getStart();
+        while(floor<maxFloor){
+            for (int x =0;x<pList.size();x++) {
+                if (pList.get(x).getStart() >= floor && pList.get(x).getStart() <= closest) {
+                    closest = pList.get(x).getStart();
+                }
             }
+            floor++;
         }
         return closest;
     }
-
 
 }
