@@ -9,6 +9,7 @@ import java.util.Iterator;
 public class PList
 {
     protected ArrayList<Passenger>pList;
+    //private Passenger entryTick;
     protected Clock clock;
     
     /**
@@ -43,7 +44,7 @@ public class PList
     }
     
     /**
-     * removes all passengers with current floor as destination
+     * removes all with current floor as destination
      */
     public ArrayList<Passenger> removeAtFloor(int floor)
     {
@@ -63,7 +64,7 @@ public class PList
     }
     
     /**
-     * FOR TESTING... displays pList in screen
+     * tests display
      */
     public void display()
     {
@@ -71,6 +72,26 @@ public class PList
         for(Passenger p : pList) {
             System.out.println(p);
         }
+    }
+    
+    /**
+     * picks up passengers on current floor
+     */
+    public ArrayList<Passenger> pickUpAtFloor(int floor)
+    {
+        //
+        ArrayList<Passenger> myList = new ArrayList<>();
+        Iterator<Passenger> it = pList.iterator();
+        
+        while(it.hasNext()) {
+            Passenger p = it.next();
+            if (p.getStart() == floor) {
+                myList.add(p);
+                it.remove(); 
+            }
+        }
+            
+        return myList;
     }
 
 }
