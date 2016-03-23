@@ -52,9 +52,9 @@ public class Controller
         
         while (tick < maxCount)
         {
-            source.act();
+            source.act(tick);
             
-            car.act();
+            car.act(tick);
             
             tick++;
             
