@@ -20,6 +20,7 @@ public class Controller
     private ECar car;
     private int tick;
     private Clock myClock;
+    private Statistics myReport; //Connor
     
     /**
      * Constructor for objects of class Controller.
@@ -36,6 +37,7 @@ public class Controller
         downList = new DownList(myClock);
         sinkList = new SinkList(myClock);
         incarList = new InCarList(myClock);  //...sbw
+        myReport = new Statistics(upList,downList,sinkList); //Connor
     
         source = new PassengerSource(upList, downList, maxFloor, myClock);
         car = new ECar(upList, downList, sinkList, incarList, maxFloor);
@@ -61,7 +63,7 @@ public class Controller
             myClock.incrementTick();
             
         }
-        
+        myReport.fullReport(); //Connor
     }
 
 }
