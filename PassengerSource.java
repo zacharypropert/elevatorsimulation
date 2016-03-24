@@ -76,14 +76,14 @@ public class PassengerSource
 
     }
 
-    public void act()//Connor int tick
+    public void act()//Connor no int tick
     {
        try{
             createPassenger(); //zach
         }
         catch(invalidFloorException e) //zach
         { 
-            act(); //zach --- Connor- tick as parameter, call in controller
+            act(); //zach 
         }
     }
 }
