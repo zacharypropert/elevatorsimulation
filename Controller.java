@@ -40,7 +40,7 @@ public class Controller
         myReport = new Statistics(upList,downList,sinkList); //Connor
     
         source = new PassengerSource(upList, downList, maxFloor, myClock);
-        car = new ECar(upList, downList, sinkList, incarList, maxFloor);
+        car = new ECar(upList, downList, sinkList, incarList, maxFloor, myClock);
         
         run(10);
     }
