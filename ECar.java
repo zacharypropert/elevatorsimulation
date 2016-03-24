@@ -66,7 +66,7 @@ public class ECar
                     s.addList(i.removeAtFloor(floor));
                 }
 
-                System.out.println(u.checkRequest(maxFloor));
+                System.out.println(u.checkRequest(maxFloor));   //these two lines are used for debugging
                 u.display();
             }
 
@@ -134,7 +134,7 @@ public class ECar
                     s.addList(i.removeAtFloor(floor));
                 }
                 
-                System.out.println(d.checkRequest(maxFloor));
+                System.out.println(d.checkRequest(maxFloor));   //these two lines are used for debugging
                 d.display();
             }
 
