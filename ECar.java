@@ -14,12 +14,13 @@ public class ECar
     private InCarList i;
     private int maxFloor;
     private int floor;
+    private Clock c;
 
     /**
      * Constructor for objects of class ECar
      * Starts the car at floor 1
      */
-    public ECar(UpList u, DownList d, SinkList s, InCarList i, int m)
+    public ECar(UpList u, DownList d, SinkList s, InCarList i, int m, Clock c)
     {
         Idle = 1;
         direction = 1; //e-car starts going up initially
@@ -29,6 +30,7 @@ public class ECar
         this.i = i;
         maxFloor = m;
         floor = 1;
+        this.c = c;
 
     }
 
