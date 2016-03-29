@@ -20,7 +20,7 @@ public class ECar
      * Constructor for objects of class ECar
      * Starts the car at floor 1
      */
-    public ECar(UpList u, DownList d, SinkList s, InCarList i, int m, Clock c)
+    public ECar(UpList u, DownList d, SinkList s, InCarList i, int m, Clock c)                  //CK note-Takes objects in from Controller
     {
         Idle = 1;
         direction = 1; //e-car starts going up initially
@@ -34,7 +34,7 @@ public class ECar
 
     }
 
-    public void act(int tick)  //sbw - parameter
+    public void act(int tick)  //sbw - parameter                                                    //CK note- Mmm... Tracing
     {
         if(direction == 1){
             System.out.println("                   The elevator is going up");
