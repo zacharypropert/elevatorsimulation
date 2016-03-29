@@ -41,7 +41,7 @@ public class ECar
             System.out.println("--------------------------------------------------------------");
             System.out.println("                          Up List");
             System.out.println("--------------------------------------------------------------");
-            u.display();  //displays the curent passengers waiting to go up
+            u.display();  //displays the current passengers waiting to go up
 
             while(u.checkRequest(maxFloor) != 1000){
 
