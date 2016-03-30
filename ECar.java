@@ -33,6 +33,35 @@ public class ECar
         this.c = c;
 
     }
+    
+    /**
+     * 
+     * Method Objective: call inCarList and upList to check for next passenger and returns the passenger closest to the eCar
+     * at its current floor. If there are no passengers in both lists return 1000 so the elevator will change direction. 
+     * 
+     * NOTE: Method DOES NOT work as of yet because there is currently no checkRequest in inCarList, so unable to test but
+     * I believe with my current understanding of the code this should work. -Zach
+     */
+    public int findClosest(int floor, int direction)
+    {
+        int ul = 0;
+        int il = 0;
+        int close;
+
+        ul = u.checkRequest(floor);
+        il = i.checkRequest(floor, direction);
+
+        if(floor<ul<il)
+            close = ul;
+
+        if(floor<il<ul)
+            close = il;
+
+        if(u.checkRequest(floor) == 1000 && i.checkRequest(floor, direction) == null)
+            close = 1000;
+
+        return close;
+    }
 
     public void act(int tick)  //sbw - parameter                                                    //CK note- Mmm... Tracing
     {
