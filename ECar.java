@@ -15,6 +15,8 @@ public class ECar
     private int maxFloor;
     private int floor;
     private Clock c;
+    final int COMPLETED_UP = 1000
+    final int COMPLETED_DOWN = 0
 
     /**
      * Constructor for objects of class ECar
@@ -44,7 +46,7 @@ public class ECar
      * 
      * InCarList has been updated for checkRequest. Still an issue with some of findClosest()...
      * I believe there is a simple fix for the third if. -Connor
-     */
+     
     public int findClosest(int floor, int direction)
     {
         int ul = 0;
@@ -65,6 +67,7 @@ public class ECar
 
         return close;
     }
+    */
 
     public void act(int tick)  //sbw - parameter                                                    //CK note- Mmm... Tracing
     {
