@@ -15,8 +15,8 @@ public class ECar
     private int maxFloor;
     private int floor;
     private Clock c;
-    final int COMPLETED_UP = 1000
-    final int COMPLETED_DOWN = 0
+    final int COMPLETED_UP = 1000;
+    final int COMPLETED_DOWN = 0;
 
     /**
      * Constructor for objects of class ECar
@@ -54,7 +54,7 @@ public class ECar
         int close = 0;
 
         ul = u.checkRequest(floor);
-        il = i.checkUoRequest(floor);
+        il = i.checkUpRequest(floor);
 
         if(floor<ul && ul<il) //Changed boolean statement from if(floor<ul && ul<il) -Connor
             close = ul;
