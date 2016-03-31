@@ -82,7 +82,7 @@ public class ECar
             while(i.isEmpty() == false){
                 s.addList(i.removeAtFloor(floor));  //removes the passenger from the inCarList and adds them to the sinkList
 
-                System.out.println("Tick #: " + tick + " The Elevator is at floor: " + floor);        //displays the current Floor of the e-car
+                System.out.println("Tick #" + tick + ": "+" The Elevator is at floor: " + floor);        //displays the current Floor of the e-car
                 System.out.println();
 
                 floor++;
@@ -110,7 +110,7 @@ public class ECar
             while(i.isEmpty() == false){
                 s.addList(i.removeAtFloor(floor));  //removes the passenger from the inCarList and adds them to the sinkList
 
-                System.out.println("Tick#: " + tick + "The Elevator is at floor: " + floor);        //displays the current Floor of the e-car
+                System.out.println("Tick#" + tick +":" + "The Elevator is at floor: " + floor);        //displays the current Floor of the e-car
 
                 floor--;
             }
