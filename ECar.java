@@ -53,10 +53,10 @@ public class ECar
         ul = u.checkRequest(floor);
         il = i.checkRequest(floor, direction);
 
-        if(floor<ul<il)
+        if(floor<ul && ul<il) //Changed boolean statement from if(floor<ul && ul<il) -Connor
             close = ul;
 
-        if(floor<il<ul)
+        if(floor<il && il<ul) //Changed boolean statement from if(floor<il && il<ul) -Connor
             close = il;
 
         if(u.checkRequest(floor) == 1000 && i.checkRequest(floor, direction) == null)
