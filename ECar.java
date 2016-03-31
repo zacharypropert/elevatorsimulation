@@ -75,16 +75,18 @@ public class ECar
             while(u.checkRequest(floor) != COMPLETED_UP){
                 i.addList(u.pickUpAtFloor(floor));  //removes the passenger from the upList and adds them to the inCarList
                 floor++;
+                System.out.println("Tick#" + tick + ": The Elevator is at floor: " + floor);
                 System.out.println(u.checkRequest(floor));   //these two lines are used for debugging
                 u.display();
             }
 
-            while(i.isEmpty() == false){
+            while(i.checkUpRequest(floor)!=2000){
                 s.addList(i.removeAtFloor(floor));  //removes the passenger from the inCarList and adds them to the sinkList
 
-                System.out.println("Tick #" + tick + ": "+" The Elevator is at floor: " + floor);        //displays the current Floor of the e-car
-                System.out.println();
-
+                System.out.println("Tick #" + tick + ":  The Elevator is at floor: " + floor);    //displays the current Floor of the e-car
+                
+                System.out.println(u.checkRequest(floor));   //these two lines are used for debugging
+                u.display();
                 floor++;
             }
 
@@ -103,14 +105,15 @@ public class ECar
             while(d.checkRequest(floor) != COMPLETED_DOWN){
                 i.addList(d.pickUpAtFloor(floor));  //removes the passenger from the downList and adds them to the inCarList
                 floor--;
+                System.out.println("Tick#" + tick + ": The Elevator is at floor: " + floor);
                 System.out.println(d.checkRequest(floor));   //these two lines are used for debugging
                 d.display();
             }
 
-            while(i.isEmpty() == false){
+            while(i.checkDownRequest(floor)!=0){
                 s.addList(i.removeAtFloor(floor));  //removes the passenger from the inCarList and adds them to the sinkList
 
-                System.out.println("Tick#" + tick +":" + "The Elevator is at floor: " + floor);        //displays the current Floor of the e-car
+                System.out.println("Tick#" + tick + ": The Elevator is at floor: " + floor);    //displays the current Floor of the e-car
 
                 floor--;
             }
@@ -126,5 +129,6 @@ public class ECar
         }
 
     }
+
 
 }
