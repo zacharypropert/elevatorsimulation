@@ -41,6 +41,8 @@ public class ECar
      * 
      * NOTE: Method DOES NOT work as of yet because there is currently no checkRequest in inCarList, so unable to test but
      * I believe with my current understanding of the code this should work. -Zach
+     * 
+     * InCarList has been updated for checkRequest. -Connor
      */
     public int findClosest(int floor, int direction)
     {
