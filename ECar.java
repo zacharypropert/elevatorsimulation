@@ -68,140 +68,61 @@ public class ECar
 
     public void act(int tick)  //sbw - parameter                                                    //CK note- Mmm... Tracing
     {
+        System.out.println("The Elevator is at floor:" + floor);        //displays the current Floor of the e-car
         if(direction == 1){
             System.out.println("                   The elevator is going up");
-            System.out.println("--------------------------------------------------------------");
-            System.out.println("                          Up List");
-            System.out.println("--------------------------------------------------------------");
-            u.display();  //displays the current passengers waiting to go up
 
-            while(u.checkRequest(maxFloor) != 1000){
-
+            while(u.checkRequest(floor) != COMPLETED_UP){
                 i.addList(u.pickUpAtFloor(floor));  //removes the passenger from the upList and adds them to the inCarList
-                System.out.println();
-                System.out.println("--------------------------------------------------------------");
-                System.out.println("                         InCar List");
-                System.out.println("--------------------------------------------------------------");
-
-                i.display();    //displays who is currently in the e-car
-
-                System.out.println();
-                System.out.println("******************************************************************");
-                System.out.println("                The Elevator is at floor:" + floor);        //displays the current Floor of the e-car
-                System.out.println("******************************************************************");
-                System.out.println();
-
-                if(u.checkRequest(maxFloor)<floor && i.isEmpty() == true && u.checkRequest(maxFloor)!=1000){
-                    floor--;
-                    s.addList(i.removeAtFloor(floor));
-                }
-                else{
-                    floor++;
-                    s.addList(i.removeAtFloor(floor));
-                }
-
-                System.out.println(u.checkRequest(maxFloor));   //these two lines are used for debugging
+                floor++;
+                System.out.println(u.checkRequest(floor));   //these two lines are used for debugging
                 u.display();
             }
 
             while(i.isEmpty() == false){
                 s.addList(i.removeAtFloor(floor));  //removes the passenger from the inCarList and adds them to the sinkList
 
-                System.out.println();
-                System.out.println("--------------------------------------------------------------");
-                System.out.println("                         InCar List");
-                System.out.println("--------------------------------------------------------------");
-
-                i.display();    //displays who is currently in the e-car
-
-                System.out.println();
-                System.out.println("******************************************************************");
-                System.out.println("                The Elevator is at floor:" + floor);        //displays the current Floor of the e-car
-                System.out.println("******************************************************************");
+                System.out.println("Tick #: " + tick + " The Elevator is at floor: " + floor);        //displays the current Floor of the e-car
                 System.out.println();
 
-                System.out.println("--------------------------------------------------------------");
-                System.out.println("                         Sink List");
-                System.out.println("--------------------------------------------------------------");
-
-                s.display();    //displays the passengers in the sink list
                 floor++;
             }
 
-            System.out.println();
-            System.out.println("******************************************************************");
-            System.out.println("                    This is run number: " + tick);      //displays the current run of the act method
-            System.out.println("******************************************************************");
-            System.out.println();
-
-            direction = -1; //changes the direction to down
-        }
-
-        if(direction == -1){
-            System.out.println("                  The Elevator is going down");
-            System.out.println("--------------------------------------------------------------");
-            System.out.println("                         Down List");
-            System.out.println("--------------------------------------------------------------");
-            d.display();  //displays the curent passengers waiting to go down
-
-            while(d.checkRequest(maxFloor) != 0){
-
-                i.addList(d.pickUpAtFloor(floor));  //removes the passenger from the downList and adds them to the inCarList
-                System.out.println();
-                System.out.println("--------------------------------------------------------------");
-                System.out.println("                         InCar List");
-                System.out.println("--------------------------------------------------------------");
-                i.display();    //displays who is currently in the e-car
-
-                System.out.println();
-                System.out.println("******************************************************************");
-                System.out.println("                The Elevator is at floor:" + floor);        //displays the current Floor of the e-car
-                System.out.println("******************************************************************");
-                System.out.println();
-
-                if(d.checkRequest(maxFloor) > floor && i.isEmpty() == true && d.checkRequest(maxFloor)!=0){
+            if(d.checkRequest(maxFloor) > floor){
+                while(floor<d.checkRequest(maxFloor)){
                     floor++;
-                    s.addList(i.removeAtFloor(floor));
+                    i.addList(d.removeAtFloor(floor));
                 }
-                else{
-                    floor--;
-                    s.addList(i.removeAtFloor(floor));
-                }
-                
-                System.out.println(d.checkRequest(maxFloor));   //these two lines are used for debugging
+            }
+            direction = -1; //changes the direction to down
+
+        }
+        else if(direction == -1){
+            System.out.println("                  The Elevator is going down");
+
+            while(d.checkRequest(floor) != COMPLETED_DOWN){
+                i.addList(d.pickUpAtFloor(floor));  //removes the passenger from the downList and adds them to the inCarList
+                floor--;
+                System.out.println(d.checkRequest(floor));   //these two lines are used for debugging
                 d.display();
             }
 
             while(i.isEmpty() == false){
                 s.addList(i.removeAtFloor(floor));  //removes the passenger from the inCarList and adds them to the sinkList
 
-                System.out.println();
-                System.out.println("--------------------------------------------------------------");
-                System.out.println("                         InCar List");
-                System.out.println("--------------------------------------------------------------");
+                System.out.println("Tick#: " + tick + "The Elevator is at floor: " + floor);        //displays the current Floor of the e-car
 
-                i.display();    //displays who is currently in the e-car
-
-                System.out.println();
-                System.out.println("******************************************************************");
-                System.out.println("                The Elevator is at floor:" + floor);        //displays the current Floor of the e-car
-                System.out.println("******************************************************************");
-                System.out.println();
-
-                System.out.println("--------------------------------------------------------------");
-                System.out.println("                         Sink List");
-                System.out.println("--------------------------------------------------------------");
-
-                s.display();    //displays the passengers in the sink list
                 floor--;
             }
-            System.out.println();
-            System.out.println("******************************************************************");
-            System.out.println("                    This is run number: " + tick);      //displays the current run of the act method
-            System.out.println("******************************************************************");
-            System.out.println();
 
+            if(u.checkRequest(0) < floor){
+                while(floor<u.checkRequest(0)){
+                    floor--;
+                    i.addList(u.removeAtFloor(floor));
+                }
+            }
             direction = 1; //changes the direction to up
+
         }
 
     }
