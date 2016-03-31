@@ -37,7 +37,7 @@ public class InCarList extends PList
     public int checkRequest(int currentFloor, int direction)       //CKnote - Returns the 
     {
         int floor = currentFloor;
-        int closest = 0;
+        int closest = 2000;
         //loops through entire list
         for (int x =0;x<pList.size();x++) {
 
