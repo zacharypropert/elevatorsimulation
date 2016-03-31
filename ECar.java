@@ -49,7 +49,7 @@ public class ECar
     {
         int ul = 0;
         int il = 0;
-        int close;
+        int close = 0;
 
         ul = u.checkRequest(floor);
         il = i.checkRequest(floor, direction);
@@ -60,7 +60,7 @@ public class ECar
         if(floor<il && il<ul) //Changed boolean statement from if(floor<il && il<ul) -Connor
             close = il;
 
-        if(u.checkRequest(floor) == 1000 && i.checkRequest(floor, direction) == null)
+        if(u.checkRequest(floor) == 1000 && i.checkRequest(floor, direction) == 2000)
             close = 1000;
 
         return close;
