@@ -43,7 +43,7 @@ public class ECar
      * I believe with my current understanding of the code this should work. -Zach
      * 
      * InCarList has been updated for checkRequest. Still an issue with some of findClosest()...
-     * I believe there is a simple fix for the third if block. -Connor
+     * I believe there is a simple fix for the third if. -Connor
      */
     public int findClosest(int floor, int direction)
     {
