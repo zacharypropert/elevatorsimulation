@@ -52,7 +52,7 @@ public class ECar
         int close = 0;
 
         ul = u.checkRequest(floor);
-        il = i.checkRequest(floor);
+        il = i.checkUoRequest(floor);
 
         if(floor<ul && ul<il) //Changed boolean statement from if(floor<ul && ul<il) -Connor
             close = ul;
