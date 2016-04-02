@@ -47,7 +47,7 @@ public class ECar
      * InCarList has been updated for checkRequest. Still an issue with some of findClosest()...
      * I believe there is a simple fix for the third if. -Connor
      
-    public int findClosest(int floor, int direction)
+    public int findClosest(int floor)
     {
         int ul = 0;
         int il = 0;
@@ -62,73 +62,64 @@ public class ECar
         if(floor<il && il<ul) //Changed boolean statement from if(floor<il && il<ul) -Connor
             close = il;
 
-        if(u.checkRequest(floor) == 1000 && i.checkRequest(floor, direction) == 2000)
+        if(u.checkRequest(floor) == 1000 && i.checkUpRequest(floor) == 2000)
             close = 1000;
 
         return close;
     }
     */
-
+   
     public void act(int tick)  //sbw - parameter                                                    //CK note- Mmm... Tracing
     {
         System.out.println("The Elevator is at floor:" + floor);        //displays the current Floor of the e-car
         if(direction == 1){
-            System.out.println("                   The elevator is going up");
-
-            while(u.checkRequest(floor) != COMPLETED_UP){
-                i.addList(u.pickUpAtFloor(floor));  //removes the passenger from the upList and adds them to the inCarList
-                floor++;
-                System.out.println("Tick#" + tick + ": The Elevator is at floor: " + floor);
-                System.out.println(u.checkRequest(floor));   //these two lines are used for debugging
-                u.display();
-            }
-
-            while(i.checkUpRequest(floor)!=2000){
-                s.addList(i.removeAtFloor(floor));  //removes the passenger from the inCarList and adds them to the sinkList
-
-                System.out.println("Tick #" + tick + ":  The Elevator is at floor: " + floor);    //displays the current Floor of the e-car
+            System.out.println("                   The Elevator is going up");
+            
+            //given current floor, we'll locate next floor to either discharge or 
+            //  pick up, going up
+            
+            int closeUL = u.checkRequest(floor);
+            int closeIC = i.checkUpRequest(floor);
+            int closest = (closeUL < closeIC)?closeUL:closeIC;
+            if(closest <= maxFloor){ //our next stop
+                floor = closest;
                 
-                System.out.println(u.checkRequest(floor));   //these two lines are used for debugging
-                u.display();
-                floor++;
-            }
+                i.addList(u.pickUpAtFloor(floor));  //removes passenger from UpList, adds them to InCarList
 
-            if(d.checkRequest(maxFloor) > floor){
-                while(floor<d.checkRequest(maxFloor)){
-                    floor++;
-                    i.addList(d.removeAtFloor(floor));
-                }
+                s.addList(i.removeAtFloor(floor));  //removes passenger from InCarList, adds them to SinkList
+                
+                System.out.println("Tick#" + tick + ": The Elevator is at floor: " + floor);
             }
-            direction = -1; //changes the direction to down
-
+            else{    //change direction
+                if(d.checkRequest(maxFloor) > floor)
+                    floor = maxFloor;   //restart from top floor
+                direction = -1;
+            }
         }
+        
         else if(direction == -1){
             System.out.println("                  The Elevator is going down");
-
-            while(d.checkRequest(floor) != COMPLETED_DOWN){
-                i.addList(d.pickUpAtFloor(floor));  //removes the passenger from the downList and adds them to the inCarList
-                floor--;
+            
+            //given current floor, we'll locate next floor to either discharge or 
+            //  pick up, going down
+            
+            int closeDL = d.checkRequest(floor);
+            int closeIC = i.checkDownRequest(floor);
+            int closest = (closeDL > closeIC)?closeDL:closeIC;
+            if(closest >= 1){ //our next stop
+                floor = closest;
+               
+                i.addList(d.pickUpAtFloor(floor));  //removes passenger from DownList, adds them to InCarList
+  
+                s.addList(i.removeAtFloor(floor));  //removes passenger from InCarList, adds them to SinkList
+                
                 System.out.println("Tick#" + tick + ": The Elevator is at floor: " + floor);
-                System.out.println(d.checkRequest(floor));   //these two lines are used for debugging
-                d.display();
             }
-
-            while(i.checkDownRequest(floor)!=0){
-                s.addList(i.removeAtFloor(floor));  //removes the passenger from the inCarList and adds them to the sinkList
-
-                System.out.println("Tick#" + tick + ": The Elevator is at floor: " + floor);    //displays the current Floor of the e-car
-
-                floor--;
+            else{    //change direction
+                if(u.checkRequest(0) < floor)
+                    floor = 1;   //restart from bottom floor
+                direction = 1;
             }
-
-            if(u.checkRequest(0) < floor){
-                while(floor<u.checkRequest(0)){
-                    floor--;
-                    i.addList(u.removeAtFloor(floor));
-                }
-            }
-            direction = 1; //changes the direction to up
-
         }
 
     }
