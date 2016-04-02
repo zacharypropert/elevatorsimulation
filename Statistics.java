@@ -9,7 +9,7 @@ public class Statistics
     /**
      * Constructor for objects of class Statistics
      */
-    public Statistics(UpList upList, DownList downList, SinkList sinkList)
+    public Statistics(SinkList sinkList)
     {
         this.sinkList= sinkList;
         waitList=new ArrayList<>();
@@ -79,6 +79,35 @@ public class Statistics
     }
 
     /**
+     * Lists all wait times in Controller simulation
+     */
+    public void listWaitTimes()
+    {        
+        int countPassenger = 0;
+        int i = 0;
+        for(Passenger p : sinkList.getCloneList())
+        {
+            countPassenger++;
+        }
+        System.out.println();
+        for(Passenger p : sinkList.getCloneList())
+        {            
+            int wait = p.getExitTick() - p.getStartTick();
+            
+            if(i + 1 == countPassenger)
+            {
+                System.out.print(wait);
+            }
+            else
+            {
+                System.out.print(wait + ", ");
+            }
+            i++;
+        }
+        System.out.println();
+    }
+
+    /**
      * Called at the end of Controller's run to shoot back ending stats
      */
     public void fullReport()
@@ -88,4 +117,3 @@ public class Statistics
         numberOfPassengers();
     }
 }
-
