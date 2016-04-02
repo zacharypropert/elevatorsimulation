@@ -21,7 +21,7 @@ public class Statistics
     {        
         int wait = 0;
         int temp = 0;
-        int totalWaitTime = 0;
+        double totalWaitTime = 0;
         double avgWait = 0;
         int countPassenger=0;
         for(Passenger p : sinkList.getCloneList())
@@ -31,9 +31,8 @@ public class Statistics
             countPassenger++;
         }
         for(int i : waitList)
-        {
-            temp = i;
-            totalWaitTime = temp + i;            
+        {            
+            totalWaitTime += i;              
         }
         avgWait = totalWaitTime/countPassenger;
         System.out.println("The average wait time for all passengers was " + avgWait + " ticks");
