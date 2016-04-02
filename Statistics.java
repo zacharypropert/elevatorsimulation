@@ -89,7 +89,7 @@ public class Statistics
         {
             countPassenger++;
         }
-        System.out.println("Wait times for all Passengers: ");
+        System.out.print("Wait times for all Passengers: ");
         for(Passenger p : sinkList.getCloneList())
         {            
             int wait = p.getExitTick() - p.getStartTick();
@@ -115,7 +115,7 @@ public class Statistics
         {
             countPassenger++;
         }
-        System.out.println();
+        System.out.print("Destinations for all Passengers: ");
         for(Passenger p : sinkList.getCloneList())
         {            
             int floor = p.getDestination();
