@@ -84,12 +84,12 @@ public class Statistics
     public void listWaitTimes()
     {        
         int countPassenger = 0;
-        int i = 0;
+        int i = 0;        
         for(Passenger p : sinkList.getCloneList())
         {
             countPassenger++;
         }
-        System.out.println();
+        System.out.println("Wait times for all Passengers: ");
         for(Passenger p : sinkList.getCloneList())
         {            
             int wait = p.getExitTick() - p.getStartTick();
@@ -101,6 +101,32 @@ public class Statistics
             else
             {
                 System.out.print(wait + ", ");
+            }
+            i++;
+        }
+        System.out.println();
+    }
+    
+    public void desirableFloors()
+    {        
+        int countPassenger = 0;
+        int i = 0;
+        for(Passenger p : sinkList.getCloneList())
+        {
+            countPassenger++;
+        }
+        System.out.println();
+        for(Passenger p : sinkList.getCloneList())
+        {            
+            int floor = p.getDestination();
+            
+            if(i + 1 == countPassenger)
+            {
+                System.out.print(floor);
+            }
+            else
+            {
+                System.out.print(floor + ", ");
             }
             i++;
         }
