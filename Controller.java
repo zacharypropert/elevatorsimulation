@@ -1,3 +1,5 @@
+
+
 /**
  * Creates the initial objects.
  * Accesses the "Master List(s)" of all the Passengers.
@@ -35,22 +37,22 @@ public class Controller
         downList = new DownList(myClock);
         sinkList = new SinkList(myClock);
         incarList = new InCarList(myClock);  //...sbw
-        myReport = new Statistics(upList,downList,sinkList); //Connor
+        myReport = new Statistics(sinkList); //Connor - no upList and downList
     
         source = new PassengerSource(upList, downList, maxFloor, myClock);
         car = new ECar(upList, downList, sinkList, incarList, maxFloor, myClock);
         
-        run(numRun); //CKnote - Changed MaxCount to numRun and set as parameter
+        run(numRun);
     }
     
     /**
      * Contains the simulation loop to invoke the act method on the objects.
      */
-    public void run(int numRun) //CKnote - Changed MaxCount to numRun and set as parameter
+    public void run(int numRun)
     {
         tick = 0;
         
-        while (tick < numRun) //CKnote - Changed MaxCount to numRun and set as parameter
+        while (tick < numRun)
         {
             source.act();
             
@@ -63,6 +65,10 @@ public class Controller
         }
         myReport.fullReport(); //Connor
     }
+    
+    public void showAllWaitTimes()
+    {
+         myReport.listWaitTimes();
+    }
 
 }
-
