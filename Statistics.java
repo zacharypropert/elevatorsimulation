@@ -22,21 +22,21 @@ public class Statistics
         int wait = 0;
         int temp = 0;
         int totalWaitTime = 0;
-        int avgWait = 0;
+        double avgWait = 0;
         int countPassenger=0;
         for(Passenger p : sinkList.getCloneList())
         {
-            wait = p.getExitTick() - p.getEntryTick();
+            wait = p.getExitTick() - p.getStartTick();
             waitList.add(wait);
             countPassenger++;
         }
         for(int i : waitList)
         {
             temp = i;
-            totalWaitTime = temp + i;
-            avgWait = totalWaitTime/countPassenger;
+            totalWaitTime = temp + i;            
         }
-        System.out.println("The average wait time for all passengers was " +avgWait);
+        avgWait = totalWaitTime/countPassenger;
+        System.out.println("The average wait time for all passengers was " + avgWait + " ticks");
     }
 
     public void longestWait()
@@ -46,14 +46,14 @@ public class Statistics
         int totalWaitTime = 0;        
         for(Passenger p : sinkList.getCloneList())
         {
-            wait = p.getStartTick() - p.getExitTick();
+            wait = p.getExitTick() - p.getStartTick();
             if(wait>temp)
             {
                 temp = wait;                
             }
         }
 
-        System.out.println("The longest wait was " + temp);
+        System.out.println("The longest wait was " + temp + " ticks");
     }
 
     public void numberOfPassengers()
