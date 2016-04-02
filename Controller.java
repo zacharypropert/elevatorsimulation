@@ -66,9 +66,20 @@ public class Controller
         myReport.fullReport(); //Connor
     }
     
-    public void showAllWaitTimes()
+    /**
+     * Displays each wait time for passengers
+     */
+    public void showAllWaitTimes() //CKnote - Optional view of wait times after Controller runs
     {
          myReport.listWaitTimes();
+    }
+    
+    /**
+     * Displays floors requested by passengers
+     */
+    public void showDesiredFloors() //CKnote - Floors traveled requested as
+    {
+        myReport.desirableFloors();
     }
 
 }
