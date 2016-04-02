@@ -36,9 +36,9 @@ public class Statistics
         {            
             totalWaitTime += i;              
         }
-        avgWait = totalWaitTime/countPassenger;
+        avgWait = totalWaitTime/countPassenger;       
 
-        System.out.println("The average wait time for all passengers was " + avgWait + " ticks");
+        System.out.printf("The average wait time for all passengers was %1.2f ticks", avgWait);
     }
 
     /**
@@ -61,7 +61,7 @@ public class Statistics
                 angryPassStart = p.getStartTick();
             }
         }
-        System.out.println("Passenger #" + angryPassNum +" arrived at tick " + angryPassStart + " with the longest wait at " + temp + " ticks");
+        System.out.println("\nPassenger #" + angryPassNum +" arrived at tick " + angryPassStart + " with the longest wait at " + temp + " ticks");
     }
 
     /**
