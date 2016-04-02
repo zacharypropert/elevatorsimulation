@@ -1,5 +1,6 @@
 import java.util.*;
 /**
+ * @Connor Keenan
  */
 public class Statistics
 {
@@ -16,6 +17,7 @@ public class Statistics
     }
 
     /**
+     * Calculates the average wait time
      */
     public void avgWait()
     {        
@@ -35,26 +37,36 @@ public class Statistics
             totalWaitTime += i;              
         }
         avgWait = totalWaitTime/countPassenger;
+
         System.out.println("The average wait time for all passengers was " + avgWait + " ticks");
     }
 
+    /**
+     * Calculates the longest wait time
+     */
     public void longestWait()
     {        
-        int wait = 0;
-        int temp = 0;
-        int totalWaitTime = 0;        
+        int wait = 0;               //Loops through wait times in sinkList 
+        int temp = 0;               //keeps track of highest wait
+        int totalWaitTime = 0;      //How many ticks everyone waited collectively 
+        int angryPassNum = 0;       //reference number to sinkList to find longest wait
+        int angryPassStart = 0;     //When that Passenger was created
         for(Passenger p : sinkList.getCloneList())
         {
             wait = p.getExitTick() - p.getStartTick();
             if(wait>temp)
             {
-                temp = wait;                
+                temp = wait;    
+                angryPassNum = sinkList.getCloneList().indexOf(p);
+                angryPassStart = p.getStartTick();
             }
         }
-
-        System.out.println("The longest wait was " + temp + " ticks");
+        System.out.println("Passenger #" + angryPassNum +" arrived at tick " + angryPassStart + " with the longest wait at " + temp + " ticks");
     }
 
+    /**
+     * Calculates the total number of passengers
+     */
     public void numberOfPassengers()
     {
         int countPassenger = 0;
@@ -66,6 +78,9 @@ public class Statistics
         System.out.println("There were " + countPassenger + " passengers");
     }
 
+    /**
+     * Called at the end of Controller's run to shoot back ending stats
+     */
     public void fullReport()
     {
         avgWait();
