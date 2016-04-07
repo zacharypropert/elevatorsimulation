@@ -1,5 +1,6 @@
 
 
+
 /**
  * Creates the initial objects.
  * Accesses the "Master List(s)" of all the Passengers.
@@ -37,7 +38,7 @@ public class Controller
         downList = new DownList(myClock);
         sinkList = new SinkList(myClock);
         incarList = new InCarList(myClock);  //...sbw
-        myReport = new Statistics(sinkList); //Connor - no upList and downList
+        myReport = new Statistics(sinkList, incarList); //Connor - no upList and downList
     
         source = new PassengerSource(upList, downList, maxFloor, myClock);
         car = new ECar(upList, downList, sinkList, incarList, maxFloor, myClock);
@@ -80,6 +81,22 @@ public class Controller
     public void showDesiredFloors() //CKnote - Floors traveled requested as
     {
         myReport.desirableFloors();
+    }
+    
+    /**
+     * Displays passengers that have reached destination
+     */ 
+    public void ControlltestID()        //Checks passengers in sinklist after run
+    {
+        myReport.testID();
+    }
+    
+    /**
+     * Displays passengers stuck in Elevator
+     */
+    public void leftInCar()             //Checks passengers in inCarList after run
+    {
+        myReport.inCarRemaining();
     }
 
 }
