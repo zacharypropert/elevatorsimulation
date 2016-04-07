@@ -17,6 +17,8 @@ public class Passenger
     private int entryTick; //tick when passenger enters elevator car
     private int exitTick;  //tick when passenger exits elevator car
     private Clock clock;
+    private int iD; //CKnote - iD for each passenger
+    
 
     /**
      * Creates a new passenger with a starting location and a destination, also sets the
@@ -29,6 +31,15 @@ public class Passenger
         startTick = tick;
         entryTick = 0;
         exitTick = 0;
+        iD = 0;; //CKnote - Should give every passenger a unique id
+    }
+    
+    /**
+     * Returns number unique identifying a passenger
+     */
+    public int getID() //Cknote
+    {
+        return iD;
     }
 
     /**
@@ -53,6 +64,11 @@ public class Passenger
     public int getStartTick()
     {
         return startTick;
+    }
+    
+     public void setID(int newID) //Cknote
+    {
+        iD = newID;
     }
 
     /**
