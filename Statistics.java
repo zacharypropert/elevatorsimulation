@@ -5,16 +5,18 @@ import java.util.*;
 public class Statistics
 {
     private SinkList sinkList;
+    private InCarList inCarList;
     ArrayList<Integer> waitList = new ArrayList<Integer>();
     /**
      * Constructor for objects of class Statistics
      */
-    public Statistics(SinkList sinkList)
+    public Statistics(SinkList sinkList, InCarList inCarList)
     {
-        this.sinkList= sinkList;
+        this.sinkList = sinkList;
+        this.inCarList = inCarList; 
         waitList=new ArrayList<>();
 
-    }
+    }    
 
     /**
      * Calculates the average wait time
@@ -141,5 +143,26 @@ public class Statistics
         avgWait();
         longestWait();
         numberOfPassengers();
+    }
+    /**
+     * Ensures ID works for every Passenger
+     */
+    public void testID() 
+    {
+        for(Passenger p : sinkList.getCloneList())
+        {   
+            System.out.println(p.getID());
+        }
+    }
+    
+    /**
+     * Finds passengers left in inCarList
+     */
+    public void inCarRemaining() 
+    {
+        for(Passenger p : inCarList.getCloneList())
+        {   
+            System.out.println(p.getID());
+        }
     }
 }
