@@ -13,7 +13,7 @@ public class PassengerSource
     private int maxFloor;
     private int rgenFloor;
     private Clock clock; //JEREMY ADDED!
-   
+    private static int passCount = 0; //CKnote - Keeps track of passengers with iD
     /**
      * Constructor for objects of class PassengerSource
      */
@@ -38,6 +38,7 @@ public class PassengerSource
         int randomInt = halfMax + maxFloor;
         int start = rgen.nextInt(randomInt - (halfMax / 4) + 1);
         int end = rgen.nextInt(randomInt + 1);
+        
         if(start > maxFloor)
             start = 1;
         if(end > maxFloor)
@@ -54,7 +55,8 @@ public class PassengerSource
         }else
         {
             downList.addPassenger(newPassenger);
-        }
+        }        
+        passCount++;
     }
 
     public void test()
