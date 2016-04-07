@@ -7,6 +7,7 @@ import java.util.ArrayList;
  */
 public class InCarList extends PList
 {
+    private static int passCount = 1; //CKnote - maintains passenger id count 
 
     /**
      * Constructor for objects of class InCarList
@@ -20,10 +21,12 @@ public class InCarList extends PList
 
     public void addList(ArrayList<Passenger> other)                 //CKnote - Sets entry tick to passenger. Then adds passenger to pList?
     {
-        //
+        //        
         for(Passenger p : other) {
             p.setEntryTick(clock.getTick());
-            pList.add(p);
+            p.setID(passCount);                                     //CKnote - Assigns id to passenger
+            pList.add(p);            
+            passCount++;
 
         }
     }
@@ -65,5 +68,10 @@ public class InCarList extends PList
         }
         
         return closest;
+    }
+    
+    public ArrayList<Passenger> getCloneList() //CKnotw - Needed to provide Statistics with copy
+    {
+        return pList; //attempted to clone but wouldn't work
     }
 }
