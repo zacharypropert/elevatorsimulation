@@ -35,12 +35,20 @@ public class Passenger
     }
     
     /**
-     * Returns number unique identifying a passenger
+     * Returns unique number identifying a passenger
      */
     public int getID() //Cknote
     {
         return iD;
-    }
+    }    
+    
+    /**
+     * Sets unique number identifying a passenger
+     */
+    public void setID(int id) //Cknote
+    {
+        iD = id;
+    }    
 
     /**
      * Returns the starting location of a passenger.
