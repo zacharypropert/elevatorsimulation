@@ -123,6 +123,11 @@ public class ECar
         }
 
     }
+    
+    public int getFloor()
+    {
+        return floor;
+    }
 
 
 }
