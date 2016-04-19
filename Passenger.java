@@ -73,11 +73,6 @@ public class Passenger
     {
         return startTick;
     }
-    
-     public void setID(int newID) //Cknote
-    {
-        iD = newID;
-    }
 
     /**
      * Returns the start tick of the passenger from when the passenger is created.
