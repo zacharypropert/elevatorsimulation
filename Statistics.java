@@ -46,28 +46,26 @@ public class Statistics
     /**
      * Calculates the longest wait time
      */
-    public void longestWait()
+     public void longestWait()
     {        
         int wait = 0;               //Loops through wait times in sinkList 
         int temp = 0;               //keeps track of highest wait
         int totalWaitTime = 0;      //How many ticks everyone waited collectively 
         int angryPassNum = 0;       //reference number to sinkList to find longest wait
-        int testPassNum=0;  //test
-        int angryPassStart = 0;     //When that Passenger was created
-        int count=0;
+        int angryPassStart = 0;     //When that Passenger was created     
+        Passenger angryPass = null;
         for(Passenger p : sinkList.getCloneList())
         {
             wait = p.getExitTick() - p.getStartTick();
             if(wait>temp)
             {
                 temp = wait;    
-                angryPassNum = sinkList.getCloneList().indexOf(p);
-                testPassNum = count;
+                angryPassNum = sinkList.getCloneList().indexOf(p); // record number
                 angryPassStart = p.getStartTick();
+                angryPass = p;
             }
-            count++;  //index num
         }
-        System.out.println("\nPassenger #" + angryPassNum +", recnunm="+testPassNum+" arrived at tick " + angryPassStart + " with the longest wait at " + temp + " ticks");
+        System.out.println("\nPassenger #" + angryPass.getID() + " was #" + angryPassNum +" leaving the elevator on tick " + angryPassStart + " with the longest wait at " + temp + " ticks");
     }
 
     /**
