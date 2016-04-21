@@ -15,14 +15,16 @@ public class ECar
     private int maxFloor;
     private int floor;
     private Clock c;
+    private GUI testGUI;
     final int COMPLETED_UP = 1000;
+    final int COMPLETED_IN = 1000;  //sbw not sure why it's diff than 1000
     final int COMPLETED_DOWN = 0;
 
     /**
      * Constructor for objects of class ECar
      * Starts the car at floor 1
      */
-    public ECar(UpList u, DownList d, SinkList s, InCarList i, int m, Clock c)                  //CK note-Takes objects in from Controller
+    public ECar(UpList u, DownList d, SinkList s, InCarList i, int m, Clock c, GUI g)                  //CK note-Takes objects in from Controller
     {
         Idle = 1;
         direction = 1; //e-car starts going up initially
@@ -33,7 +35,7 @@ public class ECar
         maxFloor = m;
         floor = 1;
         this.c = c;
-
+        testGUI = g;
     }
     
     /**
@@ -69,9 +71,11 @@ public class ECar
     }
     */
    
-    public void act(int tick)  //sbw - parameter                                                    //CK note- Mmm... Tracing
+    public void act(int tick)                                                    //CK note- Mmm... Tracing
     {
         System.out.println("The Elevator is at floor:" + floor);        //displays the current Floor of the e-car
+        testGUI.setFloorNum(floor);
+        
         if(direction == 1){
             System.out.println("                   The Elevator is going up");
             
@@ -81,7 +85,10 @@ public class ECar
             int closeUL = u.checkRequest(floor);
             int closeIC = i.checkUpRequest(floor);
             int closest = (closeUL < closeIC)?closeUL:closeIC;
-            if(closest <= maxFloor){ //our next stop
+            //.........debug
+            System.out.println("...going up, closest is "+closest);
+             
+            if((closest <= maxFloor)&& (closest >=floor)){ //our next stop
                 floor = closest;
                 
                 i.addList(u.pickUpAtFloor(floor));  //removes passenger from UpList, adds them to InCarList
@@ -91,9 +98,17 @@ public class ECar
                 System.out.println("Tick#" + tick + ": The Elevator is at floor: " + floor);
             }
             else{    //change direction
-                if(d.checkRequest(maxFloor) > floor)
-                    floor = maxFloor;   //restart from top floor
-                direction = -1;
+                 direction = -1;  //sbw moved
+                 System.out.println("                  The Elevator now going down");
+            
+                
+               //if any passengers are above us waiting to go down
+               //   we set to top floor,. going down
+               if((d.checkRequest(maxFloor) > floor) 
+                     || (i.checkDownRequest(maxFloor) > floor))
+                {    floor = maxFloor;   //restart from top floor
+                      System.out.println("Tick#" + tick + ": The Elevator is at floor: " + floor);
+                    } //direction = -1;
             }
         }
         
@@ -106,7 +121,9 @@ public class ECar
             int closeDL = d.checkRequest(floor);
             int closeIC = i.checkDownRequest(floor);
             int closest = (closeDL > closeIC)?closeDL:closeIC;
-            if(closest >= 1){ //our next stop
+            //.........debug
+            System.out.println("...going down, closest is "+closest);
+            if((closest >= 1)&&(closest <=floor)){ //our next stop
                 floor = closest;
                
                 i.addList(d.pickUpAtFloor(floor));  //removes passenger from DownList, adds them to InCarList
@@ -116,17 +133,23 @@ public class ECar
                 System.out.println("Tick#" + tick + ": The Elevator is at floor: " + floor);
             }
             else{    //change direction
-                if(u.checkRequest(0) < floor)
-                    floor = 1;   //restart from bottom floor
                 direction = 1;
+                System.out.println("                  The Elevator now going up");
+            
+                //sbw: 
+                //-----------if none to pick up above, restart at 1
+                  int closeUL = u.checkRequest(floor);
+                  closeIC = i.checkUpRequest(floor);
+                  closest = (closeUL < closeIC)?closeUL:closeIC;
+                  if((closest == COMPLETED_UP)|| (closest== COMPLETED_IN))
+                     floor=1;
+               //------------------
+               //sbw ???why? if(u.checkRequest(0) < floor)
+               //             floor = 1;   //restart from bottom floor
+                //direction = 1;
             }
         }
 
-    }
-    
-    public int getFloor()
-    {
-        return floor;
     }
 
 

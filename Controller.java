@@ -1,4 +1,6 @@
 
+
+
 /**
  * Creates the initial objects.
  * Accesses the "Master List(s)" of all the Passengers.
@@ -20,71 +22,67 @@ public class Controller
     private int tick;
     private Clock myClock;
     private Statistics myReport; //Connor
-    private GUI gui;
-    private int numRun;
+    private GUI testGUI;
+    
     /**
      * Constructor for objects of class Controller.
      */
-    public Controller(int maxFloor, int numRun) throws invalidFloorException //CK- Changed maxCount to numRunand made parameter
+    public Controller(int maxFloor, int numRun, int sleeps) throws invalidFloorException //CK- Changed maxCount to numRunand made parameter
     {
         if(maxFloor < 2)
-            throw new invalidFloorException();
+        throw new invalidFloorException();
         else
-            this.maxFloor = maxFloor;
-            
-        this.numRun = numRun; 
+        this.maxFloor = maxFloor;
+        
         myClock = new Clock();
         upList = new UpList(myClock);    //sbw added parameters
         downList = new DownList(myClock);
         sinkList = new SinkList(myClock);
         incarList = new InCarList(myClock);  //...sbw
         myReport = new Statistics(sinkList, incarList); //Connor - no upList and downList
-
+    
         source = new PassengerSource(upList, downList, maxFloor, myClock);
-        car = new ECar(upList, downList, sinkList, incarList, maxFloor, myClock);
-        gui = new GUI();
-        run(numRun);
+        
+        testGUI=new GUI(maxFloor);
+        car = new ECar(upList, downList, sinkList, incarList, 
+                 maxFloor, myClock, testGUI);  //testing progress bar
+       
+        
+        run(numRun, sleeps);
     }
-
-    public void GUI()
-    {
-        gui.setProgress(car.getFloor(), maxFloor);
-        gui.setRun(myClock.getTick(), numRun);
-    }
-
+    
     /**
      * Contains the simulation loop to invoke the act method on the objects.
      */
-    public void run(int numRun)
+    public void run(int numRun, int sleeps)
     {
         tick = 0;
-
+        
         while (tick < numRun)
         {
             source.act();
-
+            
             car.act(tick);
-
+            
             tick++;
+            
             myClock.incrementTick();
-            GUI();
-            try {
-                Thread.sleep(150);                 //1000 milliseconds is one second.
-            } catch(InterruptedException ex) {
-                Thread.currentThread().interrupt();
-            }
+            try{
+                Thread.sleep(sleeps);
+            }  catch (Exception e){};
+            
         }
         myReport.fullReport(); //Connor
     }
-
+    
     /**
      * Displays each wait time for passengers
      */
     public void showAllWaitTimes() //CKnote - Optional view of wait times after Controller runs
     {
-        myReport.listWaitTimes();
+         myReport.listWaitTimes();
     }
-
+    
     /**
      * Displays floors requested by passengers
      */
@@ -92,7 +90,7 @@ public class Controller
     {
         myReport.desirableFloors();
     }
-
+    
     /**
      * Displays passengers that have reached destination
      */ 
@@ -100,7 +98,7 @@ public class Controller
     {
         myReport.testID();
     }
-
+    
     /**
      * Displays passengers stuck in Elevator
      */

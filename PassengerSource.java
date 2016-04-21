@@ -48,8 +48,6 @@ public class PassengerSource
             throw new invalidFloorException(start); //zach
        
         Passenger newPassenger = new Passenger(start, end, clock.getTick());//JEREMY
-        
-        newPassenger.setID(passCount); //CKnote - fixed id
 
         if(newPassenger.getStart() < newPassenger.getDestination())
         {

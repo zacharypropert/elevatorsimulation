@@ -21,7 +21,7 @@ public class UpList extends PList
      */
     public int checkRequest(int currentFloor)
     {
-        int floor = currentFloor;    //THE BUG!
+        int floor = currentFloor;
         int closest = 1000;
         //loops through entire list
         for (int x =0;x<pList.size();x++) {

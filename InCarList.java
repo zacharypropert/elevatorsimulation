@@ -41,7 +41,7 @@ public class InCarList extends PList
     public int checkUpRequest(int currentFloor)       //CKnote - Returns the 
     {
         int floor = currentFloor;
-        int closest = 2000;
+        int closest = 1000;
         //loops through entire list
         for (int x =0;x<pList.size();x++) {
                                                     //CKnote - Closest should change if destination is between eCar and previous mark

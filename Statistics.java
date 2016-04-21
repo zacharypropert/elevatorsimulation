@@ -52,7 +52,9 @@ public class Statistics
         int temp = 0;               //keeps track of highest wait
         int totalWaitTime = 0;      //How many ticks everyone waited collectively 
         int angryPassNum = 0;       //reference number to sinkList to find longest wait
+        int testPassNum=0;  //test
         int angryPassStart = 0;     //When that Passenger was created
+        int count=0;
         for(Passenger p : sinkList.getCloneList())
         {
             wait = p.getExitTick() - p.getStartTick();
@@ -60,10 +62,12 @@ public class Statistics
             {
                 temp = wait;    
                 angryPassNum = sinkList.getCloneList().indexOf(p);
+                testPassNum = count;
                 angryPassStart = p.getStartTick();
             }
+            count++;  //index num
         }
-        System.out.println("\nPassenger #" + angryPassNum +" arrived at tick " + angryPassStart + " with the longest wait at " + temp + " ticks");
+        System.out.println("\nPassenger #" + angryPassNum +", recnunm="+testPassNum+" arrived at tick " + angryPassStart + " with the longest wait at " + temp + " ticks");
     }
 
     /**

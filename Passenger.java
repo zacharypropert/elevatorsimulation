@@ -16,7 +16,7 @@ public class Passenger
     private int startTick; //tick at passenger creation
     private int entryTick; //tick when passenger enters elevator car
     private int exitTick;  //tick when passenger exits elevator car
-    private Clock clock;
+    //private Clock clock;  //sbw doesn't belong
     private int iD; //CKnote - iD for each passenger
     
 
@@ -35,20 +35,12 @@ public class Passenger
     }
     
     /**
-     * Returns unique number identifying a passenger
+     * Returns number unique identifying a passenger
      */
     public int getID() //Cknote
     {
         return iD;
-    }    
-    
-    /**
-     * Sets unique number identifying a passenger
-     */
-    public void setID(int id) //Cknote
-    {
-        iD = id;
-    }    
+    }
 
     /**
      * Returns the starting location of a passenger.
@@ -72,6 +64,11 @@ public class Passenger
     public int getStartTick()
     {
         return startTick;
+    }
+    
+     public void setID(int newID) //Cknote
+    {
+        iD = newID;
     }
 
     /**
