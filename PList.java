@@ -11,7 +11,7 @@ public class PList
     protected ArrayList<Passenger>pList;
     //private Passenger entryTick;
     protected Clock clock;
-    
+
     /**
      * Constructor for objects of class PList
      */
@@ -19,9 +19,9 @@ public class PList
     {
         clock = c;
         pList = new ArrayList<>();
-       
+
     }
-    
+
     /**
      * adds a passenger
      */
@@ -42,7 +42,7 @@ public class PList
             //Passenger.setEntryTick(Clock.getTick()); //working...
         }
     }
-    
+
     /**
      * removes all with current floor as destination
      */
@@ -51,7 +51,7 @@ public class PList
         //
         ArrayList<Passenger> myList = new ArrayList<>();
         Iterator<Passenger> it = pList.iterator();
-        
+
         while(it.hasNext()) {
             Passenger p = it.next();
             if (p.getDestination() == floor) {
@@ -59,10 +59,10 @@ public class PList
                 it.remove();  //sbw fix - took out parameter p
             }
         }
-            
+
         return myList;
     }
-    
+
     /**
      * tests display
      */
@@ -73,7 +73,12 @@ public class PList
             System.out.println(p);
         }
     }
-    
+
+    public int size()
+    {
+        return pList.size();
+    }
+
     /**
      * picks up passengers on current floor
      */
@@ -82,7 +87,7 @@ public class PList
         //
         ArrayList<Passenger> myList = new ArrayList<>();
         Iterator<Passenger> it = pList.iterator();
-        
+
         while(it.hasNext()) {
             Passenger p = it.next();
             if (p.getStart() == floor) {
@@ -90,7 +95,7 @@ public class PList
                 it.remove(); 
             }
         }
-            
+
         return myList;
     }
 

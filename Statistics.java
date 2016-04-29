@@ -7,15 +7,17 @@ public class Statistics
     private SinkList sinkList;
     private InCarList inCarList;
     ArrayList<Integer> waitList = new ArrayList<Integer>();
+    private float avgWait;
+    private GUI gui;
     /**
      * Constructor for objects of class Statistics
      */
-    public Statistics(SinkList sinkList, InCarList inCarList)
+    public Statistics(SinkList sinkList, InCarList inCarList, GUI g)
     {
         this.sinkList = sinkList;
         this.inCarList = inCarList; 
         waitList=new ArrayList<>();
-
+        gui = g;
     }    
 
     /**
@@ -25,8 +27,8 @@ public class Statistics
     {        
         int wait = 0;
         int temp = 0;
-        double totalWaitTime = 0;
-        double avgWait = 0;
+        float totalWaitTime = 0;
+        avgWait = 0;
         int countPassenger=0;
         for(Passenger p : sinkList.getCloneList())
         {
@@ -38,9 +40,14 @@ public class Statistics
         {            
             totalWaitTime += i;              
         }
-        avgWait = totalWaitTime/countPassenger;       
-
-        System.out.printf("The average wait time for all passengers was %1.2f ticks", avgWait);
+        avgWait = totalWaitTime/countPassenger;    
+        String num = String.format("%.2f",avgWait);
+        gui.appendText("\nThe average wait time for all passengers was " + num + " ticks");
+    }
+    
+    public float getAvg()
+    {
+        return avgWait;
     }
 
     /**
@@ -65,7 +72,7 @@ public class Statistics
                 angryPass = p;
             }
         }
-        System.out.println("\nPassenger #" + angryPass.getID() + " was #" + angryPassNum +" leaving the elevator on tick " + angryPassStart + " with the longest wait at " + temp + " ticks");
+        gui.appendText("\nPassenger #" + angryPass.getID() + " was #" + angryPassNum +" leaving the elevator on tick " + angryPassStart + " with the longest wait at " + temp + " ticks");
     }
 
     /**
@@ -79,7 +86,7 @@ public class Statistics
             countPassenger++;
         }
 
-        System.out.println("There were " + countPassenger + " passengers");
+        gui.appendText("There were " + countPassenger + " passengers");
     }
 
     /**
@@ -108,7 +115,7 @@ public class Statistics
             }
             i++;
         }
-        System.out.println();
+        gui.appendText("");
     }
     
     public void desirableFloors()
@@ -134,7 +141,7 @@ public class Statistics
             }
             i++;
         }
-        System.out.println();
+        gui.appendText("");
     }
 
     /**

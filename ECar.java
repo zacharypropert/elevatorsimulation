@@ -15,10 +15,11 @@ public class ECar
     private int maxFloor;
     private int floor;
     private Clock c;
-    private GUI testGUI;
+    private GUI gui;
     final int COMPLETED_UP = 1000;
     final int COMPLETED_IN = 1000;  //sbw not sure why it's diff than 1000
     final int COMPLETED_DOWN = 0;
+    private int elevatorBank;
 
     /**
      * Constructor for objects of class ECar
@@ -35,7 +36,8 @@ public class ECar
         maxFloor = m;
         floor = 1;
         this.c = c;
-        testGUI = g;
+        gui = g;
+        elevatorBank = 1;
     }
     
     /**
@@ -73,11 +75,11 @@ public class ECar
    
     public void act(int tick)                                                    //CK note- Mmm... Tracing
     {
-        System.out.println("The Elevator is at floor:" + floor);        //displays the current Floor of the e-car
-        testGUI.setFloorNum(floor);
+        gui.appendText("The Elevator is at floor:" + floor);        //displays the current Floor of the e-car
+        //gui.setFloorNum(floor);
         
         if(direction == 1){
-            System.out.println("                   The Elevator is going up");
+            gui.appendText("                   The Elevator is going up");
             
             //given current floor, we'll locate next floor to either discharge or 
             //  pick up, going up
@@ -86,7 +88,7 @@ public class ECar
             int closeIC = i.checkUpRequest(floor);
             int closest = (closeUL < closeIC)?closeUL:closeIC;
             //.........debug
-            System.out.println("...going up, closest is "+closest);
+            //gui.appendText("...going up, closest is "+closest);
              
             if((closest <= maxFloor)&& (closest >=floor)){ //our next stop
                 floor = closest;
@@ -95,11 +97,11 @@ public class ECar
 
                 s.addList(i.removeAtFloor(floor));  //removes passenger from InCarList, adds them to SinkList
                 
-                System.out.println("Tick#" + tick + ": The Elevator is at floor: " + floor);
+                gui.appendText("Tick#" + tick + ": The Elevator is at floor: " + floor);
             }
             else{    //change direction
                  direction = -1;  //sbw moved
-                 System.out.println("                  The Elevator now going down");
+                 gui.appendText("                  The Elevator now going down");
             
                 
                //if any passengers are above us waiting to go down
@@ -107,13 +109,13 @@ public class ECar
                if((d.checkRequest(maxFloor) > floor) 
                      || (i.checkDownRequest(maxFloor) > floor))
                 {    floor = maxFloor;   //restart from top floor
-                      System.out.println("Tick#" + tick + ": The Elevator is at floor: " + floor);
+                      gui.appendText("Tick#" + tick + ": The Elevator is at floor: " + floor);
                     } //direction = -1;
             }
         }
         
         else if(direction == -1){
-            System.out.println("                  The Elevator is going down");
+            gui.appendText("                  The Elevator is going down");
             
             //given current floor, we'll locate next floor to either discharge or 
             //  pick up, going down
@@ -122,7 +124,7 @@ public class ECar
             int closeIC = i.checkDownRequest(floor);
             int closest = (closeDL > closeIC)?closeDL:closeIC;
             //.........debug
-            System.out.println("...going down, closest is "+closest);
+            //System.out.println("...going down, closest is "+closest);
             if((closest >= 1)&&(closest <=floor)){ //our next stop
                 floor = closest;
                
@@ -130,11 +132,11 @@ public class ECar
   
                 s.addList(i.removeAtFloor(floor));  //removes passenger from InCarList, adds them to SinkList
                 
-                System.out.println("Tick#" + tick + ": The Elevator is at floor: " + floor);
+                gui.appendText("Tick#" + tick + ": The Elevator is at floor: " + floor);
             }
             else{    //change direction
                 direction = 1;
-                System.out.println("                  The Elevator now going up");
+                gui.appendText("                  The Elevator now going up");
             
                 //sbw: 
                 //-----------if none to pick up above, restart at 1
@@ -152,5 +154,13 @@ public class ECar
 
     }
 
-
+    public int getElevators()
+    {
+        return elevatorBank;
+    }
+    
+    public int getFloor()
+    {
+        return floor;
+    }
 }
