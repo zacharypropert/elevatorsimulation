@@ -55,6 +55,7 @@ public class Bank
                s.addList(ecar.get(a).removePassenger());
                 }
            else{
+               //changes the direction of the elevator
                System.out.println("Elevator#"+a+ " is now going down");
                ecar.get(a).changeDirection();
             }
