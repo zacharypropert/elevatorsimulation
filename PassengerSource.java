@@ -12,24 +12,21 @@ public class PassengerSource
     Random rgen = new Random();
     private int maxFloor;
     private int rgenFloor;
-    private Clock clock; //JEREMY ADDED!
-    private static int passCount = 0; //CKnote - Keeps track of passengers with iD
+    private Clock clock;
+    private static int passCount = 0; //Keeps track of passengers with iD
     /**
      * Constructor for objects of class PassengerSource
      */
-    public PassengerSource(UpList upList, DownList downList, int maxFloor, Clock clock) //JEREMY!
+    public PassengerSource(UpList upList, DownList downList, int maxFloor, Clock clock) 
     {
-        //upList=new ArrayList<>();
-        //downList=new ArrayList<>();
-        //createPassenger();
-        this.clock= clock; //JEREMY
-        this.maxFloor = maxFloor; //Zach
+        this.clock= clock; 
+        this.maxFloor = maxFloor; 
         this.upList = upList;
         this.downList = downList;
     }
 
     /**
-     *Creates and places passenger
+     *Creates and places passenger randomly
      */
     public void createPassenger() throws invalidFloorException
     {
@@ -44,10 +41,10 @@ public class PassengerSource
         if(end > maxFloor)
             end = 1;
 
-        if(start == 0 || end == 0 || start==end ) //zach
-            throw new invalidFloorException(start); //zach
+        if(start == 0 || end == 0 || start==end ) 
+            throw new invalidFloorException(start); 
        
-        Passenger newPassenger = new Passenger(start, end, clock.getTick());//JEREMY
+        Passenger newPassenger = new Passenger(start, end, clock.getTick());
 
         if(newPassenger.getStart() < newPassenger.getDestination())
         {
@@ -78,14 +75,14 @@ public class PassengerSource
 
     }
 
-    public void act()//Connor no int tick
+    public void act()
     {
        try{
-            createPassenger(); //zach
+            createPassenger();
         }
-        catch(invalidFloorException e) //zach
+        catch(invalidFloorException e) 
         { 
-            act(); //zach 
+            act();  
         }
     }
 }

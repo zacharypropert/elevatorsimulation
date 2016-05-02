@@ -19,7 +19,7 @@ public class Controller
     private ECar car;
     private int tick;
     private Clock myClock;
-    private Statistics myReport; //Connor
+    private Statistics myReport;
     private GUI gui;
     private int numRun;
 
@@ -39,8 +39,8 @@ public class Controller
         upList = new UpList(myClock);    //sbw added parameters
         downList = new DownList(myClock);
         sinkList = new SinkList(myClock);
-        incarList = new InCarList(myClock);  //...sbw
-        myReport = new Statistics(sinkList, incarList, gui); //Connor - no upList and downList
+        incarList = new InCarList(myClock);  //sbw
+        myReport = new Statistics(sinkList, incarList, gui);
 
         source = new PassengerSource(upList, downList, maxFloor, myClock);
         
@@ -88,13 +88,13 @@ public class Controller
             }  catch (Exception e){Thread.currentThread().interrupt();};
 
         }
-        myReport.fullReport(); //Connor
+        myReport.fullReport(); 
     }
 
     /**
      * Displays each wait time for passengers
      */
-    public void showAllWaitTimes() //CKnote - Optional view of wait times after Controller runs
+    public void showAllWaitTimes() //Optional view of wait times after Controller runs
     {
         myReport.listWaitTimes();
     }
@@ -102,7 +102,7 @@ public class Controller
     /**
      * Displays floors requested by passengers
      */
-    public void showDesiredFloors() //CKnote - Floors traveled requested as
+    public void showDesiredFloors() //Floors traveled requested as
     {
         myReport.desirableFloors();
     }

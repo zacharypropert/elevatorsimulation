@@ -9,7 +9,6 @@ import java.util.Iterator;
 public class PList
 {
     protected ArrayList<Passenger>pList;
-    //private Passenger entryTick;
     protected Clock clock;
 
     /**
@@ -23,7 +22,7 @@ public class PList
     }
 
     /**
-     * adds a passenger
+     * adds a passenger to the pList
      */
     public void addPassenger(Passenger p)
     {
@@ -32,7 +31,7 @@ public class PList
     }
 
     /**
-     * adds a list of passenger
+     * adds a list of passenger into the pList
      */
     public void addList(ArrayList<Passenger> other)
     {
@@ -74,17 +73,19 @@ public class PList
         }
     }
 
+    /**
+     * used for statistics/GUI
+     */
     public int size()
     {
         return pList.size();
     }
 
     /**
-     * picks up passengers on current floor
+     * picks up passengers at current floor and puts them into myList
      */
     public ArrayList<Passenger> pickUpAtFloor(int floor)
     {
-        //
         ArrayList<Passenger> myList = new ArrayList<>();
         Iterator<Passenger> it = pList.iterator();
 

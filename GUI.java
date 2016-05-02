@@ -41,7 +41,7 @@ public class GUI
     private int currentTick;
     private int car;
     private double avg;
-    //     private GridCanvas gridCanvas;
+    //private GridCanvas gridCanvas;
 
     public GUI(Controller c)
     {
