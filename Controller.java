@@ -22,6 +22,7 @@ public class Controller
     private Statistics myReport;
     private GUI gui;
     private int numRun;
+    private Bank bank;
 
     /**
      * Constructor for objects of class Controller.
@@ -46,6 +47,7 @@ public class Controller
         
         car = new ECar(upList, downList, sinkList, incarList, 
             maxFloor, myClock, gui);  //testing progress bar
+        bank = new Bank(numOfECars, maxFloor, upList, downList, sinkList, myClock); // used to make a bank
 
         gui.setMax(maxFloor);
         run(numRun);
@@ -78,6 +80,7 @@ public class Controller
         {
             source.act();
             car.act(tick);
+            bank.act(tick);
 
             tick++;
             myClock.incrementTick();
