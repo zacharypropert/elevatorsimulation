@@ -46,8 +46,8 @@ public class GUI
 
     public GUI(Controller c)
     {
-        makeFrame();
         control = c;
+        makeFrame();
         elevators = 1;
         currentTick = 0;
     }
