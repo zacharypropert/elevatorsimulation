@@ -1,12 +1,13 @@
+import javax.swing.*;
 import java.awt.*;
 import java.awt.Paint;
 import java.awt.event.*;
-import javax.swing.*;
 import java.awt.image.*;
-import java.util.*;
 import java.io.File;
-import javax.imageio.ImageIO;
 import java.io.IOException;
+import javax.imageio.ImageIO;
+import java.util.*;
+
 /**
  * GUI for elevator simulation
  * 
@@ -15,7 +16,12 @@ import java.io.IOException;
  */
 public class GUI
 {
+    private JFrame frame;
     private Container contentPane;
+    private Graphics g;
+    private Controller control;
+    private ECar ecar;
+    private JPanel grid;
     private JLabel run;
     private JLabel max;
     private JLabel waiting;
@@ -24,17 +30,12 @@ public class GUI
     private JLabel tick;
     private JLabel average;
     private JLabel elevator;
-    private JFrame frame;
     private JTextArea text;
-    private JPanel grid;
-    private Controller control;
-    private JScrollPane sp;
     private JProgressBar progress;
     private JProgressBar runs;
+    private JScrollPane sp;
     private JOptionPane option;
     private int numRun;
-    private Graphics g;
-    private ECar ecar;
     private int maxFloor;
     private int elevators;
     private int currentPassengers;
@@ -45,8 +46,8 @@ public class GUI
 
     public GUI(Controller c)
     {
-        control = c;
         makeFrame();
+        control = c;
         elevators = 1;
         currentTick = 0;
     }
@@ -65,10 +66,13 @@ public class GUI
 
         /* Constant Panel */
         JPanel constant = new JPanel();
+        
         max = new JLabel("  Number of Floors: " + getMax());
         constant.add(max);
+        
         elevator = new JLabel("  Number of elevators active: " + elevators);
         constant.add(elevator);
+        
         contentPane.add(constant, BorderLayout.NORTH);
 
         /* Stats Panel */
@@ -94,6 +98,7 @@ public class GUI
         stats.add(average);
 
         west.add(stats);
+        
         /* Text Box */
         text = new JTextArea(10, 30);
         JScrollPane sp = new JScrollPane(text);
