@@ -40,7 +40,7 @@ public class GUI
     private int currentPassengers;
     private int currentTick;
     private int car;
-    private double avg;
+    private float avg;
     //private GridCanvas gridCanvas;
 
     public GUI(Controller c)
@@ -182,7 +182,7 @@ public class GUI
         return currentPassengers;
     }
 
-     public void setAverage(double a)
+     public void setAverage(float a)
     {
         avg = a;
     }
