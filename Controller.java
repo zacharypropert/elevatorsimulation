@@ -5,7 +5,7 @@
  * Runs the main simulator loop and a tickCount(i.e. time).
  * It invokes the act() methods of the main object(ECar and PassengerSource) at each iteration.
  * 
- * @author
+ * First author: Jeremy 
  * @February 23, 2016.
  */
 public class Controller
