@@ -1,6 +1,8 @@
 import java.util.*;
 /**
  * @Connor Keenan
+ * 
+ * Collects generated data from Elevator simulation and derives Statistics based on their results
  */
 public class Statistics
 {
@@ -21,7 +23,7 @@ public class Statistics
     }    
 
     /**
-     * Calculates the average wait time
+     * Calculates the average wait time of unloaded passengers
      */
     public void avgWait()
     {        
@@ -44,16 +46,19 @@ public class Statistics
         String num = String.format("%.2f",avgWait);
         gui.appendText("\n The average wait time for all passengers was " + num + " ticks");
     }
-
+    
+    /**
+     * Returns the calculated average wait of all unloaded passengers 
+     */
     public float getAvg()
     {
         return avgWait;
     }
 
     /**
-     * Calculates the longest wait time
+     * Calculates the longest wait time out of the unloaded passengers
      */
-    public void longestWait()
+     public void longestWait()
     {        
         int wait = 0;               //Loops through wait times in sinkList 
         int temp = 0;               //keeps track of highest wait
@@ -72,13 +77,11 @@ public class Statistics
                 angryPass = p;
             }
         }
-        
-        if(temp != 0)
-            gui.appendText("\n Passenger #" + angryPass.getID() + " was #" + angryPassNum +" leaving the elevator on tick " + angryPassStart + " with the longest wait at " + temp + " ticks");
+        gui.appendText("\n Passenger #" + angryPass.getID() + " was #" + angryPassNum +" leaving the elevator on tick " + angryPassStart + " with the longest wait at " + temp + " ticks");
     }
 
     /**
-     * Calculates the total number of passengers
+     * Calculates the total number of passengers that have left the elevator
      */
     public void numberOfPassengers()
     {
@@ -88,7 +91,7 @@ public class Statistics
             countPassenger++;
         }
 
-        gui.appendText(" " + countPassenger + " passengers were dropped off.");
+        gui.appendText(" There were " + countPassenger + " passengers");
     }
 
     /**
@@ -106,7 +109,7 @@ public class Statistics
         for(Passenger p : sinkList.getCloneList())
         {            
             int wait = p.getExitTick() - p.getStartTick();
-
+            
             if(i + 1 == countPassenger)
             {
                 System.out.print(wait);
@@ -119,7 +122,11 @@ public class Statistics
         }
         gui.appendText(" ");
     }
-
+    
+    
+    /**
+     * Creates a list of all the visited destinations
+     */
     public void desirableFloors()
     {        
         int countPassenger = 0;
@@ -132,7 +139,7 @@ public class Statistics
         for(Passenger p : sinkList.getCloneList())
         {            
             int floor = p.getDestination();
-
+            
             if(i + 1 == countPassenger)
             {
                 System.out.print(floor);
@@ -155,7 +162,6 @@ public class Statistics
         longestWait();
         numberOfPassengers();
     }
-
     /**
      * Ensures ID works for every Passenger
      */
@@ -166,7 +172,7 @@ public class Statistics
             System.out.println(p.getID());
         }
     }
-
+    
     /**
      * Finds passengers left in inCarList
      */
