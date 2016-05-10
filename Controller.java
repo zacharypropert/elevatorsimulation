@@ -5,7 +5,7 @@
  * Runs the main simulator loop and a tickCount(i.e. time).
  * It invokes the act() methods of the main object(ECar and PassengerSource) at each iteration.
  * 
- * First author: Jeremy 
+ * @author
  * @February 23, 2016.
  */
 public class Controller
@@ -19,15 +19,16 @@ public class Controller
     private ECar car;
     private int tick;
     private Clock myClock;
-    private Statistics myReport;
+    private Statistics myReport; 
     private GUI gui;
     private int numRun;
-    private Bank bank;
+   // private Bank bank;
+    private int numOfECars;
 
     /**
      * Constructor for objects of class Controller.
      */
-    public Controller(int maxFloor, int numRun) throws invalidFloorException //CK- Changed maxCount to numRunand made parameter
+    public Controller(int maxFloor, int numRun) throws invalidFloorException 
     {
         if(maxFloor < 2)
             throw new invalidFloorException();
@@ -37,17 +38,14 @@ public class Controller
         this.numRun = numRun; 
         gui = new GUI(this);
         myClock = new Clock();
-        upList = new UpList(myClock);    //sbw added parameters
+        upList = new UpList(myClock);    
         downList = new DownList(myClock);
         sinkList = new SinkList(myClock);
-        incarList = new InCarList(myClock);  //sbw
-        myReport = new Statistics(sinkList, incarList, gui);
+        incarList = new InCarList(myClock); 
+        myReport = new Statistics(sinkList, incarList, gui); 
 
         source = new PassengerSource(upList, downList, maxFloor, myClock);
-        
-        car = new ECar(upList, downList, sinkList, incarList, 
-            maxFloor, myClock, gui);  //testing progress bar
-        bank = new Bank(numOfECars, maxFloor, upList, downList, sinkList, myClock); // used to make a bank
+        car = new ECar(upList, downList, sinkList, incarList, maxFloor, myClock, gui);
 
         gui.setMax(maxFloor);
         run(numRun);
@@ -62,10 +60,13 @@ public class Controller
     {
         gui.setProgress(car.getFloor(), maxFloor);
         gui.setRun(myClock.getTick(), numRun);
-        gui.setEcar(car.getElevators());
         gui.setPassengers(upList.size(), downList.size());
+        gui.setTotalPass(upList.size(), downList.size(), sinkList.size());
         gui.setAverage(myReport.getAvg());
         gui.setInCar(incarList.size());
+        gui.setTotalPower(car.getTotalPower());
+        gui.drawCar(car.getFloor());
+        gui.setDropOff(sinkList.size());
         gui.update();
     }
 
@@ -79,9 +80,7 @@ public class Controller
         while (tick < numRun)
         {
             source.act();
-            car.act(tick);
-            bank.act(tick);
-
+            car.act(myClock.getTick());
             tick++;
             myClock.incrementTick();
 
@@ -91,13 +90,15 @@ public class Controller
             }  catch (Exception e){Thread.currentThread().interrupt();};
 
         }
-        myReport.fullReport(); 
+ 
+        myReport.fullReport();
+        guiUpdate();
     }
 
     /**
      * Displays each wait time for passengers
      */
-    public void showAllWaitTimes() //Optional view of wait times after Controller runs
+    public void showAllWaitTimes() 
     {
         myReport.listWaitTimes();
     }
@@ -105,23 +106,23 @@ public class Controller
     /**
      * Displays floors requested by passengers
      */
-    public void showDesiredFloors() //Floors traveled requested as
+    public void showDesiredFloors() 
     {
         myReport.desirableFloors();
     }
 
     /**
-     * Displays passengers that have reached destination
+     * Displays passengers that have reached destination after run
      */ 
-    public void ControlltestID()        //Checks passengers in sinklist after run
+    public void ControlltestID()       
     {
         myReport.testID();
     }
 
     /**
-     * Displays passengers stuck in Elevator
+     * Displays passengers stuck in Elevator after run
      */
-    public void leftInCar()             //Checks passengers in inCarList after run
+    public void leftInCar()          
     {
         myReport.inCarRemaining();
     }

@@ -6,7 +6,7 @@
  * Also declares the tick at creation, tick when passenger enters elevator car, and tick when the
  * passenger exits the elevator car.
  * 
- * @Zach CS216
+ * @Zach and Connor CS216
  * @2/16/2015
  */
 public class Passenger
@@ -16,7 +16,8 @@ public class Passenger
     private int startTick; //tick at passenger creation
     private int entryTick; //tick when passenger enters elevator car
     private int exitTick;  //tick when passenger exits elevator car
-    private int iD; //unique iD for each passenger
+    //private Clock clock;  //sbw doesn't belong
+    private int iD; //CKnote - iD for each passenger
     
 
     /**
@@ -30,7 +31,7 @@ public class Passenger
         startTick = tick;
         entryTick = 0;
         exitTick = 0;
-        iD = 0; 
+        iD = 0;; //CKnote - Should give every passenger a unique id
     }
     
     /**
@@ -65,6 +66,9 @@ public class Passenger
         return startTick;
     }
     
+    /** 
+     * Allows Passenger's ID to manipulated for later use and testing
+     */
      public void setID(int newID) //Cknote
     {
         iD = newID;

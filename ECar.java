@@ -1,12 +1,12 @@
 /**
- * It is a little clunky right now
+ * 
  * 
  * Jeremy & Troy
  * February 20, 2016
  */
 public class ECar
 {
-    private int Idle;
+    private int Idle; //not sure about this one
     private int direction;
     private UpList u;
     private DownList d;
@@ -17,18 +17,21 @@ public class ECar
     private Clock c;
     private GUI gui;
     final int COMPLETED_UP = 1000;
-    final int COMPLETED_IN = 1000;
+    final int COMPLETED_IN = 1000;  //sbw not sure why it's diff than 1000
     final int COMPLETED_DOWN = 0;
     private int elevatorBank;
+    public int floorDiff = 0;
+    public double storeFloorDiff = 0;
+    public double totalPower = 0;
 
     /**
      * Constructor for objects of class ECar
-     * Starts the car at floor 1 going up
+     * Starts the car at floor 1
      */
     public ECar(UpList u, DownList d, SinkList s, InCarList i, int m, Clock c, GUI g)                  //CK note-Takes objects in from Controller
     {
         Idle = 1;
-        direction = 1; //1 = going up, -1 = going down
+        direction = 1; //e-car starts going up initially
         this.u = u;
         this.d = d;
         this.s = s;
@@ -39,92 +42,96 @@ public class ECar
         gui = g;
         elevatorBank = 1;
     }
-   
+    
     /**
-     * The main component for logic
-     * 
+     * Act method for ecar, controlling when the elevator would go up or down, pick up or drop off a
+     * passenger.
      */
     public void act(int tick)                                                    
     {
-        gui.appendText("The Elevator is at floor:" + floor);   //displays the current Floor of the e-car
+        gui.appendText(" The Elevator is at floor:" + floor);        //displays the current Floor of the e-car
         //gui.setFloorNum(floor);
-        
+
         if(direction == 1){
-            gui.appendText("                   The Elevator is going up");
-            
+            gui.appendText("                    The Elevator is going up");
+
             //given current floor, we'll locate next floor to either discharge or 
             //  pick up, going up
-            
+
             int closeUL = u.checkRequest(floor);
             int closeIC = i.checkUpRequest(floor);
             int closest = (closeUL < closeIC)?closeUL:closeIC;
-             
-            if((closest <= maxFloor)&& (closest >=floor)){ //finds the next stop
-                floor = closest;
-                
+
+            if((closest <= maxFloor)&& (closest >=floor)){ //our next stop
+                floorDiff = floor-closest;    //CK  
+                floorDiff = floorDiff*-1;
+                floor = closest;   
+
                 i.addList(u.pickUpAtFloor(floor));  //removes passenger from UpList, adds them to InCarList
 
                 s.addList(i.removeAtFloor(floor));  //removes passenger from InCarList, adds them to SinkList
-                
-                gui.appendText("Tick#" + tick + ": The Elevator is at floor: " + floor);
+
+                gui.appendText(" Tick#" + tick + ": The Elevator is at floor: " + floor);
             }
             else{    //change direction
-                 direction = -1;  //sbw moved
-                 gui.appendText("                  The Elevator now going down");
-            
-                
-               //if any passengers are above us waiting to go down
-               //   we set to top floor,. going down
-               
-               if((d.checkRequest(maxFloor) > floor) 
-                     || (i.checkDownRequest(maxFloor) > floor))
+                direction = -1;  //sbw moved
+                gui.appendText("                   The Elevator now going down");
+
+                //if any passengers are above us waiting to go down
+                //   we set to top floor,. going down
+                if((d.checkRequest(maxFloor) > floor) 
+                || (i.checkDownRequest(maxFloor) > floor))
                 {    floor = maxFloor;   //restart from top floor
-                      gui.appendText("Tick#" + tick + ": The Elevator is at floor: " + floor);
-                    } //direction = -1;
+                    gui.appendText(" Tick#" + tick + ": The Elevator is at floor: " + floor);
+                }
             }
         }
-        
+
         else if(direction == -1){
-            gui.appendText("                  The Elevator is going down");
-            
+            gui.appendText("                   The Elevator is going down");
+
             //given current floor, we'll locate next floor to either discharge or 
             //  pick up, going down
-            
+
             int closeDL = d.checkRequest(floor);
             int closeIC = i.checkDownRequest(floor);
             int closest = (closeDL > closeIC)?closeDL:closeIC;
-
             if((closest >= 1)&&(closest <=floor)){ //our next stop
-                floor = closest;
-               
+                floorDiff = floor-closest;    //CK   
+                floor = closest;   
+
                 i.addList(d.pickUpAtFloor(floor));  //removes passenger from DownList, adds them to InCarList
-  
+
                 s.addList(i.removeAtFloor(floor));  //removes passenger from InCarList, adds them to SinkList
-                
-                gui.appendText("Tick#" + tick + ": The Elevator is at floor: " + floor);
+
+                gui.appendText(" Tick#" + tick + ": The Elevator is at floor: " + floor);
             }
             else{    //change direction
                 direction = 1;
                 gui.appendText("                  The Elevator now going up");
-            
-                //sbw---if none to pick up above, restart at 1
-                
                 int closeUL = u.checkRequest(floor);
                 closeIC = i.checkUpRequest(floor);
                 closest = (closeUL < closeIC)?closeUL:closeIC;
-                
                 if((closest == COMPLETED_UP)|| (closest== COMPLETED_IN))
-                   floor=1;
+                    floor=1;
             }
         }
-
+        storeFloorDiff += floorDiff;
+        totalPower = storeFloorDiff * 2.5;
     }
 
-    public int getElevators()
+    /**
+     * Called by GUI.java to update the statistics panel. Power generated by the floors covered by the
+     * elevator. At every floor the elevator uses 2.5 kWh.
+     */
+    public double getTotalPower()
     {
-        return elevatorBank;
+        return totalPower;
     }
     
+    /**
+     * Returns current floor of the elevator.
+     */
     public int getFloor()
     {
         return floor;

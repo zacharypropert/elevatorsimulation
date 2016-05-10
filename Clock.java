@@ -2,11 +2,13 @@
 /**
  * Creates a master Clock that maintains the time while Elevator is running.
  * 
- * David Hoadley
+ * 
+ * Evan Pierce
  * 3/1/16
 **/
 public class Clock
 {
+    // instance variables - replace the example below with your own
     private int tick;
 
     /**

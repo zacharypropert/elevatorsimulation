@@ -1,6 +1,8 @@
 import java.util.*;
 /**
  * @Connor Keenan
+ * 
+ * Collects generated data from Elevator simulation and derives Statistics based on their results
  */
 public class Statistics
 {
@@ -21,7 +23,7 @@ public class Statistics
     }    
 
     /**
-     * Calculates the average wait time
+     * Calculates the average wait time of unloaded passengers
      */
     public void avgWait()
     {        
@@ -42,16 +44,19 @@ public class Statistics
         }
         avgWait = totalWaitTime/countPassenger;    
         String num = String.format("%.2f",avgWait);
-        gui.appendText("\nThe average wait time for all passengers was " + num + " ticks");
+        gui.appendText("\n The average wait time for all passengers was " + num + " ticks");
     }
     
+    /**
+     * Returns the calculated average wait of all unloaded passengers 
+     */
     public float getAvg()
     {
         return avgWait;
     }
 
     /**
-     * Calculates the longest wait time
+     * Calculates the longest wait time out of the unloaded passengers
      */
      public void longestWait()
     {        
@@ -72,11 +77,11 @@ public class Statistics
                 angryPass = p;
             }
         }
-        gui.appendText("\nPassenger #" + angryPass.getID() + " was #" + angryPassNum +" leaving the elevator on tick " + angryPassStart + " with the longest wait at " + temp + " ticks");
+        gui.appendText("\n Passenger #" + angryPass.getID() + " was #" + angryPassNum +" leaving the elevator on tick " + angryPassStart + " with the longest wait at " + temp + " ticks");
     }
 
     /**
-     * Calculates the total number of passengers
+     * Calculates the total number of passengers that have left the elevator
      */
     public void numberOfPassengers()
     {
@@ -86,7 +91,7 @@ public class Statistics
             countPassenger++;
         }
 
-        gui.appendText("There were " + countPassenger + " passengers");
+        gui.appendText(" There were " + countPassenger + " passengers");
     }
 
     /**
@@ -100,7 +105,7 @@ public class Statistics
         {
             countPassenger++;
         }
-        System.out.print("Wait times for all Passengers: ");
+        System.out.print(" Wait times for all Passengers: ");
         for(Passenger p : sinkList.getCloneList())
         {            
             int wait = p.getExitTick() - p.getStartTick();
@@ -115,9 +120,13 @@ public class Statistics
             }
             i++;
         }
-        gui.appendText("");
+        gui.appendText(" ");
     }
     
+    
+    /**
+     * Creates a list of all the visited destinations
+     */
     public void desirableFloors()
     {        
         int countPassenger = 0;
@@ -126,7 +135,7 @@ public class Statistics
         {
             countPassenger++;
         }
-        System.out.print("Destinations for all Passengers: ");
+        System.out.print(" Destinations for all Passengers: ");
         for(Passenger p : sinkList.getCloneList())
         {            
             int floor = p.getDestination();
@@ -141,7 +150,7 @@ public class Statistics
             }
             i++;
         }
-        gui.appendText("");
+        gui.appendText(" ");
     }
 
     /**

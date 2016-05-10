@@ -12,12 +12,12 @@ public class PassengerSource
     Random rgen = new Random();
     private int maxFloor;
     private int rgenFloor;
-    private Clock clock;
+    private Clock clock; 
     private static int passCount = 0; //Keeps track of passengers with iD
     /**
      * Constructor for objects of class PassengerSource
      */
-    public PassengerSource(UpList upList, DownList downList, int maxFloor, Clock clock) 
+    public PassengerSource(UpList upList, DownList downList, int maxFloor, Clock clock)//JEREMY!
     {
         this.clock= clock; 
         this.maxFloor = maxFloor; 
@@ -26,7 +26,7 @@ public class PassengerSource
     }
 
     /**
-     *Creates and places passenger randomly
+     *Creates and places passenger
      */
     public void createPassenger() throws invalidFloorException
     {
@@ -56,33 +56,18 @@ public class PassengerSource
         passCount++;
     }
 
-    public void test()
-    {
-        System.out.println("--------------------------------------------------------------");
-        System.out.println("                          Up List");
-        System.out.println("--------------------------------------------------------------");
-        upList.display();   //sbw display()
-
-        System.out.println();
-        System.out.println("--------------------------------------------------------------");
-        System.out.println("                         Down List");
-        System.out.println("--------------------------------------------------------------");
-        downList.display();  //sbw
-               
-        System.out.println();
-        System.out.println("******************************************************************");
-        System.out.println();
-
-    }
-
+    /**
+     * Creates a new passenger and if the passenger has floor values that are invalid an
+     * exception is thrown.
+     */
     public void act()
     {
        try{
-            createPassenger();
+            createPassenger(); 
         }
         catch(invalidFloorException e) 
         { 
-            act();  
+            act(); 
         }
     }
 }
