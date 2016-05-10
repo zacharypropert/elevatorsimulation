@@ -19,6 +19,7 @@ public class SinkList extends PList
     //override
     public void addList(ArrayList<Passenger> other)
     {
+        //
         for(Passenger p : other) {
             p.setExitTick(clock.getTick());
             pList.add(p);

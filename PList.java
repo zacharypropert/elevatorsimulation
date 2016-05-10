@@ -9,8 +9,9 @@ import java.util.Iterator;
 public class PList
 {
     protected ArrayList<Passenger>pList;
+    //private Passenger entryTick;
     protected Clock clock;
-
+    
     /**
      * Constructor for objects of class PList
      */
@@ -18,11 +19,11 @@ public class PList
     {
         clock = c;
         pList = new ArrayList<>();
-
+       
     }
-
+    
     /**
-     * adds a passenger to the pList
+     * adds a passenger
      */
     public void addPassenger(Passenger p)
     {
@@ -31,7 +32,7 @@ public class PList
     }
 
     /**
-     * adds a list of passenger into the pList
+     * adds a list of passenger
      */
     public void addList(ArrayList<Passenger> other)
     {
@@ -41,7 +42,7 @@ public class PList
             //Passenger.setEntryTick(Clock.getTick()); //working...
         }
     }
-
+    
     /**
      * removes all with current floor as destination
      */
@@ -50,7 +51,7 @@ public class PList
         //
         ArrayList<Passenger> myList = new ArrayList<>();
         Iterator<Passenger> it = pList.iterator();
-
+        
         while(it.hasNext()) {
             Passenger p = it.next();
             if (p.getDestination() == floor) {
@@ -58,10 +59,10 @@ public class PList
                 it.remove();  //sbw fix - took out parameter p
             }
         }
-
+            
         return myList;
     }
-
+    
     /**
      * tests display
      */
@@ -72,23 +73,16 @@ public class PList
             System.out.println(p);
         }
     }
-
+    
     /**
-     * used for statistics/GUI
-     */
-    public int size()
-    {
-        return pList.size();
-    }
-
-    /**
-     * picks up passengers at current floor and puts them into myList
+     * picks up passengers on current floor
      */
     public ArrayList<Passenger> pickUpAtFloor(int floor)
     {
+        //
         ArrayList<Passenger> myList = new ArrayList<>();
         Iterator<Passenger> it = pList.iterator();
-
+        
         while(it.hasNext()) {
             Passenger p = it.next();
             if (p.getStart() == floor) {
@@ -96,8 +90,18 @@ public class PList
                 it.remove(); 
             }
         }
-
+            
         return myList;
+    }
+    
+    public boolean isEmpty(){                                       //CKnote - If pList is empty, return true
+        if(pList.isEmpty() == true)
+            return true;
+        return false;
+    }
+    
+    public int size(){
+        return pList.size();
     }
 
 }

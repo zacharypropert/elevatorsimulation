@@ -17,7 +17,7 @@ public class UpList extends PList
     }
 
     /**
-     * Checks every floor passengers going UP
+     * passengers going UP
      */
     public int checkRequest(int currentFloor)
     {

@@ -7,17 +7,15 @@ public class Statistics
     private SinkList sinkList;
     private InCarList inCarList;
     ArrayList<Integer> waitList = new ArrayList<Integer>();
-    private float avgWait;
-    private GUI gui;
     /**
      * Constructor for objects of class Statistics
      */
-    public Statistics(SinkList sinkList, InCarList inCarList, GUI g)
+    public Statistics(SinkList sinkList, InCarList inCarList)
     {
         this.sinkList = sinkList;
         this.inCarList = inCarList; 
         waitList=new ArrayList<>();
-        gui = g;
+
     }    
 
     /**
@@ -27,8 +25,8 @@ public class Statistics
     {        
         int wait = 0;
         int temp = 0;
-        float totalWaitTime = 0;
-        avgWait = 0;
+        double totalWaitTime = 0;
+        double avgWait = 0;
         int countPassenger=0;
         for(Passenger p : sinkList.getCloneList())
         {
@@ -40,39 +38,32 @@ public class Statistics
         {            
             totalWaitTime += i;              
         }
-        avgWait = totalWaitTime/countPassenger;    
-        String num = String.format("%.2f",avgWait);
-        gui.appendText("\nThe average wait time for all passengers was " + num + " ticks");
-    }
-    
-    public float getAvg()
-    {
-        return avgWait;
+        avgWait = totalWaitTime/countPassenger;       
+
+        System.out.printf("The average wait time for all passengers was %1.2f ticks", avgWait);
     }
 
     /**
      * Calculates the longest wait time
      */
-     public void longestWait()
+    public void longestWait()
     {        
         int wait = 0;               //Loops through wait times in sinkList 
         int temp = 0;               //keeps track of highest wait
         int totalWaitTime = 0;      //How many ticks everyone waited collectively 
         int angryPassNum = 0;       //reference number to sinkList to find longest wait
-        int angryPassStart = 0;     //When that Passenger was created     
-        Passenger angryPass = null;
+        int angryPassEnd = 0;     //When that Passenger was created
         for(Passenger p : sinkList.getCloneList())
         {
             wait = p.getExitTick() - p.getStartTick();
             if(wait>temp)
             {
                 temp = wait;    
-                angryPassNum = sinkList.getCloneList().indexOf(p); // record number
-                angryPassStart = p.getStartTick();
-                angryPass = p;
+                angryPassNum = sinkList.getCloneList().indexOf(p);
+                angryPassEnd = p.getExitTick();
             }
         }
-        gui.appendText("\nPassenger #" + angryPass.getID() + " was #" + angryPassNum +" leaving the elevator on tick " + angryPassStart + " with the longest wait at " + temp + " ticks");
+        System.out.println("\nPassenger #" + angryPassNum +" arrived at tick " + angryPassEnd + " with the longest wait at " + temp + " ticks");
     }
 
     /**
@@ -86,7 +77,7 @@ public class Statistics
             countPassenger++;
         }
 
-        gui.appendText("There were " + countPassenger + " passengers");
+        System.out.println("There were " + countPassenger + " passengers");
     }
 
     /**
@@ -115,7 +106,7 @@ public class Statistics
             }
             i++;
         }
-        gui.appendText("");
+        System.out.println();
     }
     
     public void desirableFloors()
@@ -141,7 +132,7 @@ public class Statistics
             }
             i++;
         }
-        gui.appendText("");
+        System.out.println();
     }
 
     /**
