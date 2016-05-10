@@ -19,7 +19,7 @@ public class Controller
     private ECar car;
     private int tick;
     private Clock myClock;
-    private Statistics myReport; //Connor
+    private Statistics myReport; 
     private GUI gui;
     private int numRun;
    // private Bank bank;
@@ -28,7 +28,7 @@ public class Controller
     /**
      * Constructor for objects of class Controller.
      */
-    public Controller(int maxFloor, int numRun) throws invalidFloorException //CK- Changed maxCount to numRunand made parameter
+    public Controller(int maxFloor, int numRun) throws invalidFloorException 
     {
         if(maxFloor < 2)
             throw new invalidFloorException();
@@ -36,19 +36,16 @@ public class Controller
             this.maxFloor = maxFloor;
 
         this.numRun = numRun; 
-        //numOfECars = ecars;
         gui = new GUI(this);
         myClock = new Clock();
-        upList = new UpList(myClock);    //sbw added parameters
+        upList = new UpList(myClock);    
         downList = new DownList(myClock);
         sinkList = new SinkList(myClock);
-        incarList = new InCarList(myClock);  //...sbw
-        myReport = new Statistics(sinkList, incarList, gui); //Connor - no upList and downList
+        incarList = new InCarList(myClock); 
+        myReport = new Statistics(sinkList, incarList, gui); 
 
         source = new PassengerSource(upList, downList, maxFloor, myClock);
         car = new ECar(upList, downList, sinkList, incarList, maxFloor, myClock, gui);
-        //car = new ECar(maxFloor, myClock, gui); //testing progress bar
-      //  bank = new Bank(numOfECars, maxFloor, upList, downList, sinkList, myClock, gui); // used to make a bank
 
         gui.setMax(maxFloor);
         run(numRun);
@@ -93,25 +90,15 @@ public class Controller
             }  catch (Exception e){Thread.currentThread().interrupt();};
 
         }
-        
-//         while(incarList.size() > 0 || sinkList.size() < incarList.size() + upList.size() + downList.size())
-//         {
-//             car.act(myClock.getTick());
-//             myClock.incrementTick();
-//             guiUpdate();
-//             try{
-//                 Thread.sleep(500);
-//             }  catch (Exception e){Thread.currentThread().interrupt();};
-//         }
-
-        myReport.fullReport(); //Connor
+ 
+        myReport.fullReport();
         guiUpdate();
     }
 
     /**
      * Displays each wait time for passengers
      */
-    public void showAllWaitTimes() //CKnote - Optional view of wait times after Controller runs
+    public void showAllWaitTimes() 
     {
         myReport.listWaitTimes();
     }
@@ -119,23 +106,23 @@ public class Controller
     /**
      * Displays floors requested by passengers
      */
-    public void showDesiredFloors() //CKnote - Floors traveled requested as
+    public void showDesiredFloors() 
     {
         myReport.desirableFloors();
     }
 
     /**
-     * Displays passengers that have reached destination
+     * Displays passengers that have reached destination after run
      */ 
-    public void ControlltestID()        //Checks passengers in sinklist after run
+    public void ControlltestID()       
     {
         myReport.testID();
     }
 
     /**
-     * Displays passengers stuck in Elevator
+     * Displays passengers stuck in Elevator after run
      */
-    public void leftInCar()             //Checks passengers in inCarList after run
+    public void leftInCar()          
     {
         myReport.inCarRemaining();
     }
