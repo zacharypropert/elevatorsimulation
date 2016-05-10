@@ -10,7 +10,8 @@ public class Bank
     private DownList d;
     private SinkList s;
     private Clock c;
-    private ArrayList<ECar> ecar;
+    private ArrayList<Ecar2> ecar;       //used to pick an elevator from the list
+-                                       //that is not the first car
 
     /**
      * recieves the number of elevators and
@@ -24,10 +25,10 @@ public class Bank
         this.d = d;
         this.s = s;
         this.c = c;
-        ecar= new ArrayList<ECar>();    // an array list to keep track of the elevators
+        ecar= new ArrayList<Ecar2>();    // an array list to keep track of the elevators
 
         for(int x =0; x<amount; x++){
-            ecar.add(new ECar(maxFloor,c));
+            ecar.add(new Ecar2(maxFloor,c));
         }
     }
     
@@ -91,7 +92,7 @@ public class Bank
      */
     public int getNearestUpCar(int floor)
     {
-        ECar car = new ECar(maxFloor, c);
+        Ecar2 car = new Ecar2(maxFloor, c);
         int e = 0;
         ArrayList<Integer> e2 = new ArrayList<>(); //used if multiple cars are closest
 
@@ -126,7 +127,7 @@ public class Bank
      */
     public int getNearestDownCar(int floor)
     {
-        ECar car = new ECar(maxFloor, c);
+        Ecar2 car = new Ecar2(maxFloor, c);
         int e = 0;
         ArrayList<Integer> e2  = new ArrayList<>();
 
