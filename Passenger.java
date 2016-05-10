@@ -6,7 +6,7 @@
  * Also declares the tick at creation, tick when passenger enters elevator car, and tick when the
  * passenger exits the elevator car.
  * 
- * @Zach CS216
+ * @Zach and Connor CS216
  * @2/16/2015
  */
 public class Passenger
