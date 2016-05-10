@@ -1,184 +1,127 @@
-import java.util.*;
+
 /**
- * @Connor Keenan
+ * Models a single passenger, creates a passenger and defines their starting location and 
+ * their destination. 
+ *
+ * Also declares the tick at creation, tick when passenger enters elevator car, and tick when the
+ * passenger exits the elevator car.
+ * 
+ * @Zach CS216
+ * @2/16/2015
  */
-public class Statistics
+public class Passenger
 {
-    private SinkList sinkList;
-    private InCarList inCarList;
-    ArrayList<Integer> waitList = new ArrayList<Integer>();
-    private float avgWait;
-    private GUI gui;
-    /**
-     * Constructor for objects of class Statistics
-     */
-    public Statistics(SinkList sinkList, InCarList inCarList, GUI g)
-    {
-        this.sinkList = sinkList;
-        this.inCarList = inCarList; 
-        waitList=new ArrayList<>();
-        gui = g;
-    }    
+    private int start; //Starting floor
+    private int destination; //ending floor
+    private int startTick; //tick at passenger creation
+    private int entryTick; //tick when passenger enters elevator car
+    private int exitTick;  //tick when passenger exits elevator car
+    //private Clock clock;  //sbw doesn't belong
+    private int iD; //CKnote - iD for each passenger
+    
 
     /**
-     * Calculates the average wait time
+     * Creates a new passenger with a starting location and a destination, also sets the
+     * creation tick (startTick), sets the entryTick and exitTick to 0.
      */
-    public void avgWait()
-    {        
-        int wait = 0;
-        int temp = 0;
-        float totalWaitTime = 0;
-        avgWait = 0;
-        int countPassenger=0;
-        for(Passenger p : sinkList.getCloneList())
-        {
-            wait = p.getExitTick() - p.getStartTick();
-            waitList.add(wait);
-            countPassenger++;
-        }
-        for(int i : waitList)
-        {            
-            totalWaitTime += i;              
-        }
-        avgWait = totalWaitTime/countPassenger;    
-        String num = String.format("%.2f",avgWait);
-        gui.appendText("\n The average wait time for all passengers was " + num + " ticks");
+    public Passenger(int start, int destination, int tick)
+    {
+        this.start = start;
+        this.destination = destination;
+        startTick = tick;
+        entryTick = 0;
+        exitTick = 0;
+        iD = 0;; //CKnote - Should give every passenger a unique id
     }
     
     /**
-     * Returns the calculated average wait of all unloaded passengers 
+     * Returns number unique identifying a passenger
      */
-    public float getAvg()
+    public int getID() //Cknote
     {
-        return avgWait;
+        return iD;
     }
 
     /**
-     * Calculates the longest wait time out of the unloaded passengers
+     * Returns the starting location of a passenger.
      */
-     public void longestWait()
-    {        
-        int wait = 0;               //Loops through wait times in sinkList 
-        int temp = 0;               //keeps track of highest wait
-        int totalWaitTime = 0;      //How many ticks everyone waited collectively 
-        int angryPassNum = 0;       //reference number to sinkList to find longest wait
-        int angryPassStart = 0;     //When that Passenger was created     
-        Passenger angryPass = null;
-        for(Passenger p : sinkList.getCloneList())
-        {
-            wait = p.getExitTick() - p.getStartTick();
-            if(wait>temp)
-            {
-                temp = wait;    
-                angryPassNum = sinkList.getCloneList().indexOf(p); // record number
-                angryPassStart = p.getStartTick();
-                angryPass = p;
-            }
-        }
-        gui.appendText("\n Passenger #" + angryPass.getID() + " was #" + angryPassNum +" leaving the elevator on tick " + angryPassStart + " with the longest wait at " + temp + " ticks");
-    }
-
-    /**
-     * Calculates the total number of passengers that have left the elevator
-     */
-    public void numberOfPassengers()
+    public int getStart()
     {
-        int countPassenger = 0;
-        for(Passenger p : sinkList.getCloneList())
-        {
-            countPassenger++;
-        }
-
-        gui.appendText(" There were " + countPassenger + " passengers");
+        return start;
     }
 
     /**
-     * Lists all wait times in Controller simulation
+     * Returns the destination of the passenger.
      */
-    public void listWaitTimes()
-    {        
-        int countPassenger = 0;
-        int i = 0;        
-        for(Passenger p : sinkList.getCloneList())
-        {
-            countPassenger++;
-        }
-        System.out.print(" Wait times for all Passengers: ");
-        for(Passenger p : sinkList.getCloneList())
-        {            
-            int wait = p.getExitTick() - p.getStartTick();
-            
-            if(i + 1 == countPassenger)
-            {
-                System.out.print(wait);
-            }
-            else
-            {
-                System.out.print(wait + ", ");
-            }
-            i++;
-        }
-        gui.appendText(" ");
+    public int getDestination()
+    {
+        return destination;
+    }
+
+    /**
+     * Returns the start tick of the passenger from when the passenger is created.
+     */
+    public int getStartTick()
+    {
+        return startTick;
     }
     
-    
-    /**
-     * Creates a list of all the visited destinations
+    /** 
+     * Allows Passenger's ID to manipulated for later use and testing
      */
-    public void desirableFloors()
-    {        
-        int countPassenger = 0;
-        int i = 0;
-        for(Passenger p : sinkList.getCloneList())
-        {
-            countPassenger++;
-        }
-        System.out.print(" Destinations for all Passengers: ");
-        for(Passenger p : sinkList.getCloneList())
-        {            
-            int floor = p.getDestination();
-            
-            if(i + 1 == countPassenger)
-            {
-                System.out.print(floor);
-            }
-            else
-            {
-                System.out.print(floor + ", ");
-            }
-            i++;
-        }
-        gui.appendText(" ");
+     public void setID(int newID) //Cknote
+    {
+        iD = newID;
     }
 
     /**
-     * Called at the end of Controller's run to shoot back ending stats
+     * Returns the start tick of the passenger from when the passenger is created.
      */
-    public void fullReport()
+    public void setStartTick(int sTick)
     {
-        avgWait();
-        longestWait();
-        numberOfPassengers();
+        startTick = sTick;
     }
+
     /**
-     * Ensures ID works for every Passenger
+     * Returns the entry tick of the passenger from when the passenger enters the eCar.
      */
-    public void testID() 
+    public int getEntryTick()
     {
-        for(Passenger p : sinkList.getCloneList())
-        {   
-            System.out.println(p.getID());
-        }
+        return entryTick;
     }
-    
+
     /**
-     * Finds passengers left in inCarList
+     * Returns the entry tick of the passenger from when the passenger enters the eCar.
      */
-    public void inCarRemaining() 
+    public void setEntryTick(int eTick)
     {
-        for(Passenger p : inCarList.getCloneList())
-        {   
-            System.out.println(p.getID());
-        }
+        entryTick = eTick;
     }
+
+    /**
+     * Returns the exit tick of the passenger from when the passenger exits the eCar.
+     */
+    public int getExitTick()
+    {
+        return exitTick;
+    }
+
+    /**
+     * Returns the exit tick of the passenger from when the passenger exits the eCar.
+     */
+    public void setExitTick(int xTick)
+    {
+        exitTick = xTick;
+    }
+
+    /**
+     * toString() method for class Passenger to output the passenger's starting location and where 
+     * the passenger's destination is at.
+     */
+    public String toString()
+    {
+        return "A passenger is at floor "+ start + " and wishes to travel to floor "
+        + destination;
+    }
+
 }
