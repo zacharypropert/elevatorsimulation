@@ -16,7 +16,8 @@ public class Passenger
     private int startTick; //tick at passenger creation
     private int entryTick; //tick when passenger enters elevator car
     private int exitTick;  //tick when passenger exits elevator car
-    private int iD; //unique iD for each passenger
+    //private Clock clock;  //sbw doesn't belong
+    private int iD; //CKnote - iD for each passenger
     
 
     /**
@@ -30,7 +31,7 @@ public class Passenger
         startTick = tick;
         entryTick = 0;
         exitTick = 0;
-        iD = 0; 
+        iD = 0;; //CKnote - Should give every passenger a unique id
     }
     
     /**

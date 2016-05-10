@@ -5,7 +5,7 @@
  * Runs the main simulator loop and a tickCount(i.e. time).
  * It invokes the act() methods of the main object(ECar and PassengerSource) at each iteration.
  * 
- * First author: Jeremy 
+ * @author
  * @February 23, 2016.
  */
 public class Controller
@@ -19,10 +19,11 @@ public class Controller
     private ECar car;
     private int tick;
     private Clock myClock;
-    private Statistics myReport;
+    private Statistics myReport; //Connor
     private GUI gui;
     private int numRun;
-    private Bank bank;
+   // private Bank bank;
+    private int numOfECars;
 
     /**
      * Constructor for objects of class Controller.
@@ -35,19 +36,19 @@ public class Controller
             this.maxFloor = maxFloor;
 
         this.numRun = numRun; 
+        //numOfECars = ecars;
         gui = new GUI(this);
         myClock = new Clock();
         upList = new UpList(myClock);    //sbw added parameters
         downList = new DownList(myClock);
         sinkList = new SinkList(myClock);
-        incarList = new InCarList(myClock);  //sbw
-        myReport = new Statistics(sinkList, incarList, gui);
+        incarList = new InCarList(myClock);  //...sbw
+        myReport = new Statistics(sinkList, incarList, gui); //Connor - no upList and downList
 
         source = new PassengerSource(upList, downList, maxFloor, myClock);
-        
-        car = new ECar(upList, downList, sinkList, incarList, 
-            maxFloor, myClock, gui);  //testing progress bar
-        bank = new Bank(numOfECars, maxFloor, upList, downList, sinkList, myClock); // used to make a bank
+        car = new ECar(upList, downList, sinkList, incarList, maxFloor, myClock, gui);
+        //car = new ECar(maxFloor, myClock, gui); //testing progress bar
+      //  bank = new Bank(numOfECars, maxFloor, upList, downList, sinkList, myClock, gui); // used to make a bank
 
         gui.setMax(maxFloor);
         run(numRun);
@@ -62,10 +63,13 @@ public class Controller
     {
         gui.setProgress(car.getFloor(), maxFloor);
         gui.setRun(myClock.getTick(), numRun);
-        gui.setEcar(car.getElevators());
         gui.setPassengers(upList.size(), downList.size());
+        gui.setTotalPass(upList.size(), downList.size(), sinkList.size());
         gui.setAverage(myReport.getAvg());
         gui.setInCar(incarList.size());
+        gui.setTotalPower(car.getTotalPower());
+        gui.drawCar(car.getFloor());
+        gui.setDropOff(sinkList.size());
         gui.update();
     }
 
@@ -79,9 +83,7 @@ public class Controller
         while (tick < numRun)
         {
             source.act();
-            car.act(tick);
-            bank.act(tick);
-
+            car.act(myClock.getTick());
             tick++;
             myClock.incrementTick();
 
@@ -91,13 +93,25 @@ public class Controller
             }  catch (Exception e){Thread.currentThread().interrupt();};
 
         }
-        myReport.fullReport(); 
+        
+//         while(incarList.size() > 0 || sinkList.size() < incarList.size() + upList.size() + downList.size())
+//         {
+//             car.act(myClock.getTick());
+//             myClock.incrementTick();
+//             guiUpdate();
+//             try{
+//                 Thread.sleep(500);
+//             }  catch (Exception e){Thread.currentThread().interrupt();};
+//         }
+
+        myReport.fullReport(); //Connor
+        guiUpdate();
     }
 
     /**
      * Displays each wait time for passengers
      */
-    public void showAllWaitTimes() //Optional view of wait times after Controller runs
+    public void showAllWaitTimes() //CKnote - Optional view of wait times after Controller runs
     {
         myReport.listWaitTimes();
     }
@@ -105,7 +119,7 @@ public class Controller
     /**
      * Displays floors requested by passengers
      */
-    public void showDesiredFloors() //Floors traveled requested as
+    public void showDesiredFloors() //CKnote - Floors traveled requested as
     {
         myReport.desirableFloors();
     }

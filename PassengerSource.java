@@ -12,21 +12,24 @@ public class PassengerSource
     Random rgen = new Random();
     private int maxFloor;
     private int rgenFloor;
-    private Clock clock;
-    private static int passCount = 0; //Keeps track of passengers with iD
+    private Clock clock; //JEREMY ADDED!
+    private static int passCount = 0; //CKnote - Keeps track of passengers with iD
     /**
      * Constructor for objects of class PassengerSource
      */
-    public PassengerSource(UpList upList, DownList downList, int maxFloor, Clock clock) 
+    public PassengerSource(UpList upList, DownList downList, int maxFloor, Clock clock) //JEREMY!
     {
-        this.clock= clock; 
-        this.maxFloor = maxFloor; 
+        //upList=new ArrayList<>();
+        //downList=new ArrayList<>();
+        //createPassenger();
+        this.clock= clock; //JEREMY
+        this.maxFloor = maxFloor; //Zach
         this.upList = upList;
         this.downList = downList;
     }
 
     /**
-     *Creates and places passenger randomly
+     *Creates and places passenger
      */
     public void createPassenger() throws invalidFloorException
     {
@@ -41,10 +44,10 @@ public class PassengerSource
         if(end > maxFloor)
             end = 1;
 
-        if(start == 0 || end == 0 || start==end ) 
-            throw new invalidFloorException(start); 
+        if(start == 0 || end == 0 || start==end ) //zach
+            throw new invalidFloorException(start); //zach
        
-        Passenger newPassenger = new Passenger(start, end, clock.getTick());
+        Passenger newPassenger = new Passenger(start, end, clock.getTick());//JEREMY
 
         if(newPassenger.getStart() < newPassenger.getDestination())
         {
@@ -56,33 +59,18 @@ public class PassengerSource
         passCount++;
     }
 
-    public void test()
-    {
-        System.out.println("--------------------------------------------------------------");
-        System.out.println("                          Up List");
-        System.out.println("--------------------------------------------------------------");
-        upList.display();   //sbw display()
-
-        System.out.println();
-        System.out.println("--------------------------------------------------------------");
-        System.out.println("                         Down List");
-        System.out.println("--------------------------------------------------------------");
-        downList.display();  //sbw
-               
-        System.out.println();
-        System.out.println("******************************************************************");
-        System.out.println();
-
-    }
-
-    public void act()
+    /**
+     * Creates a new passenger and if the passenger has floor values that are invalid an
+     * exception is thrown.
+     */
+    public void act()//Connor no int tick
     {
        try{
-            createPassenger();
+            createPassenger(); //zach
         }
-        catch(invalidFloorException e) 
+        catch(invalidFloorException e) //zach
         { 
-            act();  
+            act(); //zach 
         }
     }
 }
